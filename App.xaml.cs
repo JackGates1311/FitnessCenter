@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fitness_Center.Views;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,6 @@ namespace Fitness_Center
     /// </summary>
     public partial class App : Application
     {
+
     }
 }

@@ -1,0 +1,53 @@
+﻿<Window x:Class="Fitness_Center.Views.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Fitness_Center.Views"
+        mc:Ignorable="d"
+        Title="Fitnes Centar - Prijava na sistem" Height="380" Width="600" WindowStartupLocation="CenterScreen">
+
+
+    <Grid Margin="0,0,0,17">
+
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="100"/>
+
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+
+        </Grid.RowDefinitions>
+
+        <Label Style="{StaticResource labelBold}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Content="Prijava na fitnes centar aplikaciju"/>
+
+        <Label Content="Korisničko ime:" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
+
+        <TextBox x:Name="txtUserName"  Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" />
+
+        <Label Content="Lozinka:" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
+
+        <PasswordBox x:Name="txtPassword" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" />
+
+        <Button x:Name="btnRegister" Click="btnRegister_Click" Grid.Row="6" Grid.Column="1" Content="Registracija" HorizontalAlignment="Right" Style="{StaticResource buttonSmall}" />
+
+        <Button x:Name="btnLogin" Click="btnLogin_Click" Grid.Row="6" Grid.Column="2" Content="Prijava" HorizontalAlignment="Left" Style="{StaticResource buttonSmall}" />
+
+        <Button x:Name="btnLoginAsGuest" Click="btnLoginAsGuest_Click" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Content="Prijavi se kao gost" HorizontalAlignment="Center" Width="210" />
+        
+    </Grid>
+
+</Window>
