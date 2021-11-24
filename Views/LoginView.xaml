@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fitness_Center.Views"
         mc:Ignorable="d"
-        Title="Fitnes Centar - Prijava na sistem" Height="380" Width="600" WindowStartupLocation="CenterScreen">
+        Title="Fitnes Centar - Prijava na sistem"  MinHeight="380" MinWidth="600"
+        Height="380" Width="600" WindowStartupLocation="CenterScreen">
 
 
     <Grid Margin="0,0,0,17">
@@ -34,11 +35,11 @@
 
         <Label Style="{StaticResource labelBold}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Content="Prijava na fitnes centar aplikaciju"/>
 
-        <Label Content="Korisničko ime:" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
+        <Label Content="Korisničko ime:" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
 
         <TextBox x:Name="txtUserName"  Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" />
 
-        <Label Content="Lozinka:" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
+        <Label Content="Lozinka:" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" />
 
         <PasswordBox x:Name="txtPassword" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" />
 

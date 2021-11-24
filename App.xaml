@@ -17,12 +17,14 @@
             <Style TargetType="{x:Type Label}">
                 
                 <Setter Property="FontSize" Value="16"/>
-                
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+
             </Style>
 
             <Style TargetType="{x:Type TextBox}">
 
-                <Setter Property="Height" Value="20"/>
+                <Setter Property="Height" Value="28"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <Setter Property="MaxWidth" Value="250"/>
 
             </Style>
@@ -37,7 +39,8 @@
 
             <Style TargetType="{x:Type PasswordBox}">
 
-                <Setter Property="Height" Value="20"/>
+                <Setter Property="Height" Value="28"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <Setter Property="MaxWidth" Value="250"/>
 
             </Style>
@@ -57,6 +60,45 @@
                 <Setter Property="Margin" Value="5"/>
                 <Setter Property="MaxWidth" Value="150"/>
                 
+            </Style>
+
+            <Style x:Key="textBoxLarge" TargetType="TextBox">
+
+                <Setter Property="Height" Value="28"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Width" Value="425"/>
+                <Setter Property="MaxWidth" Value="500"/>
+
+            </Style>
+
+            <Style x:Key="textBoxLargeReadOnly" TargetType="TextBox">
+
+                <Setter Property="Height" Value="28"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Width" Value="425"/>
+                <Setter Property="MaxWidth" Value="500"/>
+                <Setter Property="IsReadOnly" Value="True"/>
+                <Setter Property="TextAlignment" Value="Center"/>
+
+            </Style>
+
+            <Style x:Key="passwordBoxLarge" TargetType="PasswordBox">
+
+                <Setter Property="Height" Value="28"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Width" Value="425"/>
+                <Setter Property="MaxWidth" Value="500"/>
+
+            </Style>
+            
+            <Style TargetType="{x:Type ComboBox}">
+
+                <Setter Property="Height" Value="28"/>
+                <Setter Property="Width" Value="425"/>
+                <Setter Property="MaxWidth" Value="500"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+
             </Style>
 
         </ResourceDictionary>

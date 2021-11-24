@@ -25,8 +25,12 @@ namespace Fitness_Center.Views
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e) 
-        { 
-            
+        {
+            RegisterNewUserView registerNewUserView = new RegisterNewUserView();
+
+            registerNewUserView.Show();
+
+            this.Hide();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -36,7 +40,11 @@ namespace Fitness_Center.Views
 
         private void btnLoginAsGuest_Click(object sender, RoutedEventArgs e)
         {
+            UnregisteredUserView unregisteredUserView = new UnregisteredUserView();
 
+            unregisteredUserView.Show();
+
+            this.Hide();
         }
     }
 }
