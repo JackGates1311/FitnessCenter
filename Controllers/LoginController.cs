@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class LoginViewModel {
+public class LoginController {
 
-    public LoginViewModel() {
+    public LoginController() {
 
     }
 

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class AdministratorViewModel {
+public class AdministratorController {
 
-    public AdministratorViewModel() {
+    public AdministratorController() {
     }
 
 

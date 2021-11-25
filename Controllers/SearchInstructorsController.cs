@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class SearchInstructorsViewModel {
+public class SearchInstructorsController {
 
-    public SearchInstructorsViewModel() {
+    public SearchInstructorsController() {
     }
 
 
