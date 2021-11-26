@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Fitness_Center.Controllers;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,6 +23,16 @@ namespace Fitness_Center.Views
         public ViewInstructorsInfoView()
         {
             InitializeComponent();
+
+            ViewInstructorsInfoController viewInstructorsInfoController = new ViewInstructorsInfoController();
+
+            viewInstructorsInfoController.loadData(tableInstructors);
+
+        }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -4,20 +4,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class SearchInstructorsController {
+public class SearchInstructorsController 
+{
 
-    public SearchInstructorsController() {
+    public SearchInstructorsController() 
+    {
+
+
+
+
     }
 
+    private void searchForInstructors(String key)
+    {
 
-
-
-
-
-
-
-
-    private void searchForInstructors(String key) {
         // TODO implement here
     }
 

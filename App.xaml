@@ -45,11 +45,50 @@
 
             </Style>
 
+            <Style TargetType ="{x:Type DataGrid}">
+
+                <Setter Property="ColumnWidth" Value="*" />
+                <Setter Property="RowHeight" Value="30" />
+                <Setter Property="AutoGenerateColumns" Value="False" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+
+            </Style>
+
+            <Style TargetType="{x:Type DataGridColumnHeader}">
+                
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                
+            </Style>
+
+            <Style TargetType="{x:Type DataGridCell}">
+
+                <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                
+                <Setter Property="Template">
+                    
+                    <Setter.Value>
+                        
+                        <ControlTemplate TargetType="{x:Type DataGridCell}">
+                            
+                            <Grid Background="{TemplateBinding Background}">
+                                
+                                <ContentPresenter VerticalAlignment="Center" />
+                                
+                            </Grid>
+                            
+                        </ControlTemplate>
+                        
+                    </Setter.Value>
+                    
+                </Setter>
+                
+            </Style>
+            
             <Style x:Key="labelBold" TargetType="Label">
 
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="FontWeight" Value="Bold"/>
-                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
                       
             </Style>
 

@@ -49,11 +49,26 @@
 
         <TextBox Grid.Row="8" Grid.Column="0"  />
 
-        <Button Grid.Row="9" Grid.Column="0" Content="Pretraži" Width="250"  Margin="10" />
+        <Button x:Name="btnSearch" Grid.Row="9" Grid.Column="0" Content="Pretraži" Click="btnSearch_Click" Width="250"  Margin="10" />
 
-        <DataGrid x:Name="tableInstructors" Grid.Row="2" Grid.Column="2" Grid.RowSpan="9" />
-        
-        
+        <DataGrid x:Name="tableInstructors" IsReadOnly="True" Grid.Row="2" Grid.Column="2" Grid.RowSpan="9">
+            
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Width ="20*" Header="Ime" Binding="{Binding Name}" />
+                <DataGridTextColumn Width ="30*" Header="Prezime" Binding="{Binding Surname}" />
+                <DataGridTextColumn Width ="50*" Header="Email" Binding="{Binding Email}" />
+                <DataGridTextColumn Width ="25*" Header="Država" Binding="{Binding Country}" />
+                <DataGridTextColumn Width ="25*" Header="Grad" Binding="{Binding City}" />
+                <DataGridTextColumn Width ="50*" Header="Ulica" Binding="{Binding Street}" />
+                <DataGridTextColumn Width ="10*" Header="Broj" Binding="{Binding AddressNumber}" />
+                
+
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+
 
 
     </Grid>
