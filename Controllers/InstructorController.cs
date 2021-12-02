@@ -27,7 +27,7 @@ public class InstructorController {
         return;
     }
 
-    private void removeWorkout(int id, WorkoutStatus status) {
+    private void removeWorkout(int id, EWorkoutStatus status) {
         // TODO implement here
         return;
     }

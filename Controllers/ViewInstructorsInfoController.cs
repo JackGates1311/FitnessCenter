@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Fitness_Center.Controllers
 {
     class ViewInstructorsInfoController
     {
-        public void loadData(DataGrid table)
+        public void loadInstructorData(DataGrid table)
         {
+
+            //var registeredUser = new RegisteredUserModel("Marko", "Mitrovic", "1311001184066", "makimitrovic07@gmail.com", "maxim123", "maxim123", EGender.Male, false);
 
             var query = "SELECT Users.Name, Users.Surname, Users.Email, Addresses.Country, Addresses.City, Addresses.Street, " +
                 "Addresses.AddressNumber FROM Addresses inner join Users ON Addresses.AddressId = Users.AddressId where Users.UserType = 'Instructor'; ";
@@ -19,27 +22,11 @@ namespace Fitness_Center.Controllers
 
             connection.openConnection();
 
-            if (connection != null && connection.Connection.State == ConnectionState.Open)
-            {
+            DataTable dt = connection.performQuery(query);
 
-                SqlCommand cmd = new SqlCommand(query, connection.Connection);
+            table.ItemsSource = dt.DefaultView;
 
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-
-                DataTable dt = new DataTable("Users");
-
-                adapter.Fill(dt);
-
-                table.ItemsSource = dt.DefaultView;
-
-                cmd.Dispose();
-
-                connection.closeConnection();
-            }
-            else
-            {
-                return;
-            }
+            connection.closeConnection();
         }
     }
 }

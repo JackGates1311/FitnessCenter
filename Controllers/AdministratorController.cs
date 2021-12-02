@@ -28,7 +28,7 @@ public class AdministratorController {
         return;
     }
 
-    private void registerNewInstructor(String name, String surname, String JMBG, String email, String userName, String password, Gender gender) {
+    private void registerNewInstructor(String name, String surname, String JMBG, String email, String userName, String password, EGender gender) {
         // TODO implement here
         return;
     }

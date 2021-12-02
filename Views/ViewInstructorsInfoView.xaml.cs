@@ -1,4 +1,5 @@
 ﻿using Fitness_Center.Controllers;
+using Fitness_Center.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -26,13 +27,13 @@ namespace Fitness_Center.Views
 
             ViewInstructorsInfoController viewInstructorsInfoController = new ViewInstructorsInfoController();
 
-            viewInstructorsInfoController.loadData(tableInstructors);
+            viewInstructorsInfoController.loadInstructorData(tableInstructors);
 
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show(LoggedInUserModel.userName.ToString());
         }
     }
 }

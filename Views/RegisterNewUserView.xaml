@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fitness_Center.Views"
+        xmlns:localControllers="clr-namespace:Fitness_Center.Controllers"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" MinHeight="625" MinWidth="1100"
         Title="Fitnes centar - Registracija novog korisnika" Height="625" Width="1100">
-    
+
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -41,66 +42,126 @@
         <Label Style="{StaticResource labelBold}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="Registracija novog korisnika" />
 
         <Label Grid.Row="1" Grid.Column="1" Content="Ime: "/>
-
-        <TextBox x:Name="txtName" Style="{StaticResource textBoxLarge}" Grid.Row="2" Grid.Column="1"  />
+        
+        <TextBox x:Name="txtName" Style="{StaticResource textBoxLargeValidated}" Grid.Row="2" Grid.Column="1"
+                 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=registeredUserModel.Name, 
+                 ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
 
         <Label Grid.Row="3" Grid.Column="1" Content="Prezime: "/>
 
-        <TextBox x:Name="txtSurname" Style="{StaticResource textBoxLarge}" Grid.Row="4" Grid.Column="1"  />
+        <TextBox x:Name="txtSurname" Style="{StaticResource textBoxLargeValidated}" Grid.Row="4" Grid.Column="1"  
+                 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=registeredUserModel.Surname, 
+                 ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
 
         <Label Grid.Row="5" Grid.Column="1" Content="Korisničko ime: "/>
 
-        <TextBox x:Name="txtUserName" Style="{StaticResource textBoxLarge}" Grid.Row="6" Grid.Column="1"  />
+        <TextBox x:Name="txtUserName" Style="{StaticResource textBoxLargeValidated}" Grid.Row="6" Grid.Column="1"  
+                 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=registeredUserModel.UserName, 
+                 ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
 
         <Label Grid.Row="7" Grid.Column="1" Content="E-Mail: "/>
 
-        <TextBox x:Name="txtEmail" Style="{StaticResource textBoxLarge}" Grid.Row="8" Grid.Column="1"  />
+        <TextBox x:Name="txtEmail" Style="{StaticResource textBoxLargeValidated}" Grid.Row="8" Grid.Column="1"  
+                 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=registeredUserModel.Email, 
+                 ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
 
         <Label Grid.Row="9" Grid.Column="1" Content="Lozinka: "/>
 
-        <PasswordBox x:Name="txtPassword" Style="{StaticResource passwordBoxLarge}" Grid.Row="10" Grid.Column="1"  />
+        <PasswordBox x:Name="txtPassword" Style="{StaticResource passwordBoxLargeValidated}" 
+                     localControllers:BoundPasswordBoxController.BindPassword="True"
+                     localControllers:BoundPasswordBoxController.BoundPassword="{Binding 
+                     Path=registeredUserModel.Password, Mode=TwoWay, ValidatesOnDataErrors=True, 
+                     UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+                     Grid.Row="10" Grid.Column="1"/>
 
         <Label Grid.Row="11" Grid.Column="1"  Content="JMBG: "/>
 
-        <TextBox x:Name="txtIDNum" Style="{StaticResource textBoxLarge}" Grid.Row="12" Grid.Column="1"  />
+        <TextBox x:Name="txtIDNum" Style="{StaticResource textBoxLargeValidated}" Grid.Row="12" Grid.Column="1"  
+                 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=registeredUserModel.JMBG, 
+                 ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
 
         <Label Grid.Row="1" Grid.Column="2"  Content="Država: "/>
 
-        <TextBox x:Name="txtCountry" Style="{StaticResource textBoxLarge}" Grid.Row="2" Grid.Column="2"  />
+        <TextBox x:Name="txtCountry" Style="{StaticResource textBoxLargeValidated}" Grid.Row="2" Grid.Column="2"  
+                 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=addressModel.Country,
+                 ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
 
         <Label Grid.Row="3" Grid.Column="2"  Content="Grad: "/>
 
-        <TextBox x:Name="txtCity" Style="{StaticResource textBoxLarge}" Grid.Row="4" Grid.Column="2"   />
+        <TextBox x:Name="txtCity" Style="{StaticResource textBoxLargeValidated}" Grid.Row="4" Grid.Column="2" 
+                 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=addressModel.City,
+                 ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
 
         <Label Grid.Row="5" Grid.Column="2"  Content="Ulica: "/>
 
-        <TextBox x:Name="txtStreet" Style="{StaticResource textBoxLarge}" Grid.Row="6" Grid.Column="2"  />
+        <TextBox x:Name="txtStreet" Style="{StaticResource textBoxLargeValidated}" Grid.Row="6" Grid.Column="2"
+                 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=addressModel.Street,
+                 ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
 
         <Label Grid.Row="7" Grid.Column="2"  Content="Broj: "/>
 
-        <TextBox x:Name="txtStreetNum" Style="{StaticResource textBoxLarge}" Grid.Row="8" Grid.Column="2" />
+        <TextBox x:Name="txtStreetNum" Style="{StaticResource textBoxLargeValidated}" Grid.Row="8" Grid.Column="2" 
+                 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=addressModel.Number,
+                 ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
 
         <Label Grid.Row="9" Grid.Column="2"  Content="Pol: "/>
 
-        <ComboBox Grid.Row="10" Grid.Column="2"  HorizontalAlignment="Center">
+        <ComboBox x:Name="cmbBoxGender" Grid.Row="10" Grid.Column="2"
+                  HorizontalAlignment="Center">
 
             <ComboBoxItem Content="Muški"/>
             <ComboBoxItem Content="Ženski"/>
-            <ComboBoxItem Content="Drugo"/>
 
         </ComboBox>
 
         <Label Grid.Row="11" Grid.Column="2" Content="Tip korisnika: "/>
 
-        <ComboBox Grid.Row="12" Grid.Column="2" HorizontalAlignment="Center">
+        <ComboBox x:Name="cmbBoxUserType" Grid.Row="12" Grid.Column="2" HorizontalAlignment="Center">
 
             <ComboBoxItem Content="Polaznik"/>
             <ComboBoxItem Content="Instruktor"/>
-            <!--<ComboBoxItem Content="Administrator"/>  proveriti da li admin mo\e da kreira drugog administratora-->
 
         </ComboBox>
-        
-        <Button x:Name="btnRegister" Grid.Row="14" Grid.Column="1" Grid.ColumnSpan="2"  Content="Registruj se" Click="btnRegister_Click" Width="875"/>
+
+        <Button x:Name="btnRegister" Grid.Row="14" Grid.Column="1" Grid.ColumnSpan="2"  Content="Registruj se" IsDefault="True" Click="btnRegister_Click" Width="875">
+         
+            <Button.Style>
+                
+                <Style TargetType="Button">
+                    
+                    <Setter Property="IsEnabled" Value="False"/>
+                    
+                    <Style.Triggers>
+                        
+                        <MultiDataTrigger>
+                            
+                            <MultiDataTrigger.Conditions>
+                                
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtName}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtSurname}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtUserName}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtEmail}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtPassword}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtIDNum}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtCountry}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtCity}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtStreet}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtStreetNum}" Value="False"/>
+                                
+                                <!-- Here you can add multiple validations!-->
+                            </MultiDataTrigger.Conditions>
+                            
+                            <Setter Property="IsEnabled" Value="True"/>
+                            
+                        </MultiDataTrigger>
+                        
+                    </Style.Triggers>
+                    
+                </Style>
+                
+            </Button.Style>
+            
+        </Button>
 
     </Grid>
 </Window>

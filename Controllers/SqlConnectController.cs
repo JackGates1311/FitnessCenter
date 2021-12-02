@@ -21,13 +21,36 @@ namespace Fitness_Center.Controllers
             try
             {
                 Connection.Open();
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.ToString());
             }
         }
+
+        public DataTable performQuery(String query)
+        {
+            if (Connection.State == ConnectionState.Open)
+            {
+
+                SqlCommand cmd = new SqlCommand(query, Connection);
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+
+                DataTable dt = new DataTable();
+
+                adapter.Fill(dt);
+
+                cmd.Dispose();
+
+                return dt;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public void closeConnection()
         {
             Connection.Close();

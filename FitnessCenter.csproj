@@ -7,8 +7,17 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <WarningsAsErrors />
+    <NoWarn>1701;1702;XDG0062</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <Folder Include="Assets\" />
+    <Folder Include="Databases\" />
     <Folder Include="Interfaces\" />
   </ItemGroup>
 

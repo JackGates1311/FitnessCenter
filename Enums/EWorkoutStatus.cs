@@ -1,5 +1,6 @@
 
-public enum WorkoutStatus {
+public enum EWorkoutStatus 
+{
     Available,
     Reserved
 }

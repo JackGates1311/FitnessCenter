@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fitness_Center.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -20,8 +21,6 @@ namespace Fitness_Center.Views
         public LoginView()
         {
             InitializeComponent();
-
-
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e) 
@@ -35,7 +34,11 @@ namespace Fitness_Center.Views
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            LoginController loginController = new LoginController();
 
+            loginController.loginToSystem(txtUserName.Text, txtPassword.Password);
+
+            //LoggedInUserModel.userName = "maxim123";
         }
 
         private void btnLoginAsGuest_Click(object sender, RoutedEventArgs e)

@@ -51,6 +51,7 @@
                 <Setter Property="RowHeight" Value="30" />
                 <Setter Property="AutoGenerateColumns" Value="False" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="SelectionMode" Value="Single"/>
 
             </Style>
 
@@ -129,7 +130,7 @@
                 <Setter Property="MaxWidth" Value="500"/>
 
             </Style>
-            
+
             <Style TargetType="{x:Type ComboBox}">
 
                 <Setter Property="Height" Value="28"/>
@@ -137,6 +138,45 @@
                 <Setter Property="MaxWidth" Value="500"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="SelectedIndex" Value="0"/>
+
+            </Style>
+
+            <ControlTemplate x:Key="validationErrorTemplate">
+
+                <DockPanel>
+
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom">
+
+
+                        <TextBlock Foreground="Red" Margin="2,0,0,0" Text="{Binding ElementName=adornedErrorElement, 
+                            Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
+
+                    </StackPanel>
+
+                    <AdornedElementPlaceholder x:Name="adornedErrorElement" />
+
+                </DockPanel>
+
+            </ControlTemplate>
+
+            <Style x:Key="textBoxLargeValidated" TargetType="TextBox">
+
+                <Setter Property="Height" Value="28"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Width" Value="425"/>
+                <Setter Property="MaxWidth" Value="500"/>
+                <Setter Property="Validation.ErrorTemplate" Value="{StaticResource validationErrorTemplate}"/>
+
+            </Style>
+
+            <Style x:Key="passwordBoxLargeValidated" TargetType="PasswordBox">
+
+                <Setter Property="Height" Value="28"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Width" Value="425"/>
+                <Setter Property="MaxWidth" Value="500"/>
+                <Setter Property="Validation.ErrorTemplate" Value="{StaticResource validationErrorTemplate}"/>
 
             </Style>
 
