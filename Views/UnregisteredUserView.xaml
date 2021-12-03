@@ -34,7 +34,7 @@
 
         <Label Grid.Row="1" Grid.Column="1" Content="Šifra: "/>
 
-        <TextBox x:Name="txtFitnessCenterPassword" Style="{StaticResource textBoxLargeReadOnly}" Text="{Binding Path=Id}" Grid.Row="2" Grid.Column="1"  />
+        <TextBox x:Name="txtFitnessCenterPassword" Style="{StaticResource textBoxLargeReadOnly}" Text="{Binding Id}" Grid.Row="2" Grid.Column="1"  />
 
         <Label Grid.Row="3" Grid.Column="1" Content="Naziv centra: "/>
 

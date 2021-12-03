@@ -19,7 +19,7 @@ Perzistenciju podataka realizovati korišćenjem relacione baze podataka.
 
 Aplikacija podržava sledeće funkcionalnosti:
 
-1. Neregistrovani korisnik ima mogućnost pregleda osnovnih informacija o fitnes centru i o instruktorima koji rade u njemu. Nema mogućnost zakazivanja treninga.
+1. {+ Neregistrovani korisnik ima mogućnost pregleda osnovnih informacija o fitnes centru i o instruktorima koji rade u njemu. Nema mogućnost zakazivanja treninga. +}
 
 2. Omogućiti neregistrovanim korisnicima (polaznicima) mogućnost registracije na sistem. Prilikom registracije unose se - ime, prezime, JMBG (jedinstven), pol, adresa, email, lozinka. Za novog korisnika se automatski formira prazna lista treninga (lista podrazumeva prikaz svih treninga koje je polaznik rezervisao).
 
@@ -35,7 +35,7 @@ svoje slobodne treninge. Ograničenje prilikom brisanja termina: instruktor ne m
 7. Polaznik ima mogućnost da za odabranog instruktura pregleda listu slobodnih/rezervisanih treninga. Omogućiti grafički prikaz svih treninga (REZERVISANIH/SLOBODNIH) za odabranog instruktora. Polaznik ima mogućnost rezervacije SLOBODNOG treninga, kao i otkazivanja svog prethodno REZERVISANOG treninga.
 
 8. Pretraga je realizovana tako da korisnici imaju pregled sledećih entiteta:
-	* Instruktora - pretraga po imenu, prezimenu, adresi, email adresi (ovu mogućnost imaju REGISTROVANI/NEREGISTROVANI koriscnici sistema)
+	{+ * Instruktora - pretraga po imenu, prezimenu, adresi, email adresi (ovu mogućnost imaju REGISTROVANI/NEREGISTROVANI koriscnici sistema) +}
 	* Registrovani korisnici- pretraga po imenu, prezimenu, adresi, email adresi, ili po tipu (ovu mogućnost imaju administratori)
 
-9. Prilikom pretrage omogućiti sortiranje entiteta po imenu i prezimenu, u opdajućem,i/ili rastućem redosledu.
+9. {+ Prilikom pretrage omogućiti sortiranje entiteta po imenu i prezimenu, u opdajućem,i/ili rastućem redosledu. +}
