@@ -22,6 +22,15 @@ namespace Fitness_Center.Views
             InitializeComponent();
 
             this.Closed += new EventHandler(MainWindow_Closed);
+
+            var fitnessCenterModel = new FitnessCenterModel(); /// HERE IS THE PROBLEM!!
+
+            var unregisteredUserController = new UnregisteredUserController();
+
+            unregisteredUserController.fetchFitnessCenterInfo(fitnessCenterModel);
+
+            this.DataContext = fitnessCenterModel;
+
         }
 
         void MainWindow_Closed(object sender, EventArgs e)
@@ -36,6 +45,7 @@ namespace Fitness_Center.Views
             ViewInstructorsInfoView viewInstructorsInfoView = new ViewInstructorsInfoView();
 
             viewInstructorsInfoView.ShowDialog();
+
         }
     }
 }

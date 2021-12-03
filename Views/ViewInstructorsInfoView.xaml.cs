@@ -21,19 +21,34 @@ namespace Fitness_Center.Views
     /// </summary>
     public partial class ViewInstructorsInfoView : Window
     {
+
+        ViewInstructorsInfoController viewInstructorsInfoController = new ViewInstructorsInfoController();
+
         public ViewInstructorsInfoView()
         {
             InitializeComponent();
 
-            ViewInstructorsInfoController viewInstructorsInfoController = new ViewInstructorsInfoController();
-
-            viewInstructorsInfoController.loadInstructorData(tableInstructors);
-
+            fillTableInstructors();
         }
 
+        private void fillTableInstructors() 
+        {
+            viewInstructorsInfoController.loadInstructorData(tableInstructors, "", "", "", "");
+        }
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(LoggedInUserModel.userName.ToString());
+            viewInstructorsInfoController.loadInstructorData(tableInstructors, txtName.Text, txtSurname.Text, 
+                txtEmail.Text, txtStreet.Text);
+        }
+
+        private void btnClearSearch_Click(object sender, RoutedEventArgs e)
+        {
+            txtName.Clear();
+            txtSurname.Clear();
+            txtStreet.Clear();
+            txtEmail.Clear();
+
+            fillTableInstructors();
         }
     }
 }

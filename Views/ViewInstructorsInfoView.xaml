@@ -27,6 +27,7 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -35,23 +36,25 @@
 
         <Label Grid.Row="1" Grid.Column="0" Content="Ime: "/>
 
-        <TextBox Grid.Row="2" Grid.Column="0"  />
+        <TextBox x:Name="txtName" Grid.Row="2" Grid.Column="0"  />
         
         <Label Grid.Row="3" Grid.Column="0" Content="Prezime: "/>
 
-        <TextBox Grid.Row="4" Grid.Column="0"  />
+        <TextBox x:Name="txtSurname" Grid.Row="4" Grid.Column="0"  />
         
         <Label Grid.Row="5" Grid.Column="0" Content="Adresa: "/>
 
-        <TextBox Grid.Row="6" Grid.Column="0" />
+        <TextBox x:Name="txtStreet" Grid.Row="6" Grid.Column="0" />
 
         <Label Grid.Row="7" Grid.Column="0" Content="E-Mail adresa: "/>
 
-        <TextBox Grid.Row="8" Grid.Column="0"  />
+        <TextBox x:Name="txtEmail" Grid.Row="8" Grid.Column="0"  />
 
         <Button x:Name="btnSearch" Grid.Row="9" Grid.Column="0" Content="Pretraži" Click="btnSearch_Click" Width="250"  Margin="10" />
 
-        <DataGrid x:Name="tableInstructors" IsReadOnly="True" Grid.Row="2" Grid.Column="2" Grid.RowSpan="9">
+        <Button x:Name="btnClearSearch" Grid.Row="10" Grid.Column="0" Content="Poništi pretragu" Click="btnClearSearch_Click" Width="250"  Margin="10" />
+
+        <DataGrid x:Name="tableInstructors" IsReadOnly="True" Grid.Row="2" Grid.Column="2" Grid.RowSpan="10">
             
             <DataGrid.Columns>
 

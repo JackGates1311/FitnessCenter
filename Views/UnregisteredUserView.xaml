@@ -34,15 +34,15 @@
 
         <Label Grid.Row="1" Grid.Column="1" Content="Šifra: "/>
 
-        <TextBox x:Name="txtFitnessCenterPassword" Style="{StaticResource textBoxLargeReadOnly}" Grid.Row="2" Grid.Column="1"  />
+        <TextBox x:Name="txtFitnessCenterPassword" Style="{StaticResource textBoxLargeReadOnly}" Text="{Binding Path=Id}" Grid.Row="2" Grid.Column="1"  />
 
         <Label Grid.Row="3" Grid.Column="1" Content="Naziv centra: "/>
 
-        <TextBox x:Name="txtFitnessCenterName" Style="{StaticResource textBoxLargeReadOnly}" Grid.Row="4" Grid.Column="1" />
+        <TextBox x:Name="txtFitnessCenterName" Style="{StaticResource textBoxLargeReadOnly}" Text="{Binding CenterName}" Grid.Row="4" Grid.Column="1" />
 
         <Label Grid.Row="5" Grid.Column="1"  Content="Adresa centra: "/>
 
-        <TextBox x:Name="txtFitnessCenterAddress" Style="{StaticResource textBoxLargeReadOnly}" Grid.Row="6" Grid.Column="1" />
+        <TextBox x:Name="txtFitnessCenterAddress" Style="{StaticResource textBoxLargeReadOnly}" Text="{Binding Address}" Grid.Row="6" Grid.Column="1" />
 
         <Button x:Name="btnViewInstructorsInfo" Grid.Row="7" Grid.Column="1" Click="btnViewInstructorsInfo_Click" Content="Prikaži informacije o instruktorima" Width="250"/>
         

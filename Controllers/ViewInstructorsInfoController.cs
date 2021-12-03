@@ -10,13 +10,11 @@ namespace Fitness_Center.Controllers
 {
     class ViewInstructorsInfoController
     {
-        public void loadInstructorData(DataGrid table)
+        public void loadInstructorData(DataGrid table, String Name, String Surname, String Email, String Street)
         {
-
-            //var registeredUser = new RegisteredUserModel("Marko", "Mitrovic", "1311001184066", "makimitrovic07@gmail.com", "maxim123", "maxim123", EGender.Male, false);
-
             var query = "SELECT Users.Name, Users.Surname, Users.Email, Addresses.Country, Addresses.City, Addresses.Street, " +
-                "Addresses.AddressNumber FROM Addresses inner join Users ON Addresses.AddressId = Users.AddressId where Users.UserType = 'Instructor'; ";
+                "Addresses.AddressNumber FROM Addresses inner join Users ON Addresses.AddressId = Users.AddressId where Users.UserType = 'Instructor' " +
+                "and Name LIKE '%" + Name + "%' and Surname LIKE '%" + Surname + "%' and Street LIKE '%" + Street + "%' and Email LIKE '%" + Email + "%'";
 
             SqlConnectController connection = new SqlConnectController();
 
@@ -28,5 +26,6 @@ namespace Fitness_Center.Controllers
 
             connection.closeConnection();
         }
+
     }
 }
