@@ -9,42 +9,24 @@
     <Grid>
 
         <Grid.ColumnDefinitions>
-            
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="300*"/>
-            <ColumnDefinition Width="100"/>
-            
+
+            <ColumnDefinition Width="*"/>
+
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="30"/>
+
+            <RowDefinition Height="275"/>
+            <RowDefinition Height="70"/>
 
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="1" Style="{StaticResource labelBold}" Content="Informacije o fitnes centru: "/>
+        <StackPanel Grid.Row="0" Grid.Column="0">
 
-        <Label Grid.Row="1" Grid.Column="1" Content="Šifra: "/>
-
-        <TextBox x:Name="txtFitnessCenterPassword" Style="{StaticResource textBoxLargeReadOnly}" Text="{Binding Id}" Grid.Row="2" Grid.Column="1"  />
-
-        <Label Grid.Row="3" Grid.Column="1" Content="Naziv centra: "/>
-
-        <TextBox x:Name="txtFitnessCenterName" Style="{StaticResource textBoxLargeReadOnly}" Text="{Binding CenterName}" Grid.Row="4" Grid.Column="1" />
-
-        <Label Grid.Row="5" Grid.Column="1"  Content="Adresa centra: "/>
-
-        <TextBox x:Name="txtFitnessCenterAddress" Style="{StaticResource textBoxLargeReadOnly}" Text="{Binding Address}" Grid.Row="6" Grid.Column="1" />
-
-        <Button x:Name="btnViewInstructorsInfo" Grid.Row="7" Grid.Column="1" Click="btnViewInstructorsInfo_Click" Content="Prikaži informacije o instruktorima" Width="250"/>
+            <local:FitnessCenterView/>
+        </StackPanel>
+        
+        <Button x:Name="btnViewInstructorsInfo" Grid.Row="1" Grid.Column="0" Click="btnViewInstructorsInfo_Click" Content="Prikaži informacije o instruktorima" Width="250"/>
         
     </Grid>
 </Window>

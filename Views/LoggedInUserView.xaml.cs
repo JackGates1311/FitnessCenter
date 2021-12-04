@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fitness_Center.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -13,31 +14,34 @@ using System.Windows.Shapes;
 namespace Fitness_Center.Views
 {
     /// <summary>
-    /// Interaction logic for UnregisteredUserView.xaml
+    /// Interaction logic for LoggedInUserView.xaml
     /// </summary>
-    public partial class UnregisteredUserView : Window
+    public partial class LoggedInUserView : Window
     {
-        public UnregisteredUserView()
+        public LoggedInUserView()
         {
             InitializeComponent();
 
             this.Closed += new EventHandler(MainWindow_Closed);
 
+            lblUserName.Content = "Dobrodošli, prijavljeni ste kao '" + LoggedInUserModel.userName + "'";
         }
 
-        void MainWindow_Closed(object sender, EventArgs e)
+        private void MainWindow_Closed(object sender, EventArgs e)
         {
+            LoggedInUserModel.userName = null;
+            LoggedInUserModel.userType = null;
+
             LoginView loginView = new LoginView();
 
             loginView.Show();
+
+            this.Hide();
         }
 
-        private void btnViewInstructorsInfo_Click(object sender, RoutedEventArgs e)
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
-            ViewInstructorsInfoView viewInstructorsInfoView = new ViewInstructorsInfoView();
-
-            viewInstructorsInfoView.ShowDialog();
-
+            this.Close();
         }
     }
 }

@@ -1,0 +1,70 @@
+﻿<Window x:Class="Fitness_Center.Views.LoggedInUserView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Fitness_Center.Views"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="Glavni meni" Height="450" Width="800">
+    
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="150" />
+
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+        
+        </Grid.RowDefinitions>
+
+        <Label x:Name="lblUserName" Style="{StaticResource labelBold}" Grid.Row="0" Grid.Column="1"/>
+        
+        <Button x:Name="btnLogout" Style="{StaticResource buttonSmall}" Grid.Row="0" Grid.Column="2" Click="btnLogout_Click" Content="Odjava" />
+
+        <TabControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+            
+            <TabItem>
+            
+                <TabItem.Header>
+                    
+                    <StackPanel Orientation="Horizontal">
+
+                        <Label Content="O fitnes centru" />
+                        
+                    </StackPanel>
+                    
+                </TabItem.Header>
+
+                <local:FitnessCenterView/>
+                
+            </TabItem>
+
+            <TabItem>
+
+                <TabItem.Header>
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <Label Content="Svi instruktori" />
+
+                    </StackPanel>
+
+                </TabItem.Header>
+
+                <!-- USER CONTROL HERRE-->
+
+            </TabItem>
+
+        </TabControl>
+
+    </Grid>
+    
+    
+</Window>

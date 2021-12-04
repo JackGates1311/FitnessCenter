@@ -15,10 +15,7 @@ public class LoginController {
 
     }
 
-
-
-
-    public void loginToSystem(String userName, String password) {
+    public Boolean loginToSystem(String userName, String password) {
 
         var query = "SELECT * FROM users WHERE username = '" + userName + "' AND password = '" + password + "';";
 
@@ -44,14 +41,17 @@ public class LoginController {
             if (dt != null && dt.Rows.Count == 1) 
             {
                 LoggedInUserModel.userName = userName;
+
+                // HERE ADD userTzpe
+
+                return true;
             }
             else
-                MessageBox.Show("Prijava na sistem neuspešna!");
+
+                return false;
         }
         else
-        {
-            return;
-        }
+            return false;
   
     }
 

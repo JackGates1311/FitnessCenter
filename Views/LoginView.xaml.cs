@@ -36,9 +36,16 @@ namespace Fitness_Center.Views
         {
             LoginController loginController = new LoginController();
 
-            loginController.loginToSystem(txtUserName.Text, txtPassword.Password);
+            if (loginController.loginToSystem(txtUserName.Text, txtPassword.Password)) 
+            { 
+                LoggedInUserView loggedInUserView = new LoggedInUserView();
 
-            //LoggedInUserModel.userName = "maxim123";
+                loggedInUserView.Show();
+
+                this.Hide();
+            }
+            else
+                MessageBox.Show("Korisničko ime ili lozinka nisu ispravni, prijava na sistem neuspešna!", "Greška - Fitnes centar");
         }
 
         private void btnLoginAsGuest_Click(object sender, RoutedEventArgs e)
