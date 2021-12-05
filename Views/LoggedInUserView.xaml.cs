@@ -42,7 +42,7 @@ namespace Fitness_Center.Views
 
         private void MainWindow_Closed(object sender, EventArgs e)
         {
-            LoggedInUserModel.userName = null;
+            LoggedInUserModel.userName = "";
             LoggedInUserModel.userType = null;
 
             LoginView loginView = new LoginView();

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Fitness_Center.Models;
+using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -18,20 +20,68 @@ namespace Fitness_Center.Views
     /// </summary>
     public partial class FitnessCenterView : UserControl
     {
+
+        FitnessCenterModel fitnessCenterModel = new FitnessCenterModel();
+
+        AddressModel addressModel = new AddressModel();
+
+        FitnessCenterController fitnessCenterController = new FitnessCenterController();
+
         public FitnessCenterView()
         {
             InitializeComponent();
 
-            this.DataContext = new AddressModel();
+            if (LoggedInUserModel.userName != "")
+            {
+                LoadFintessCenterViewRegisteredUserMode();
+            }
+            else
+            {
+                LoadFitnessCenterViewGuestMode();
+            }
 
-            var fitnessCenterModel = new FitnessCenterModel();
+            fitnessCenterController.FetchFitnessCenterInfo(fitnessCenterModel, addressModel);
 
-            var fitnessCenterController = new FitnessCenterController();
-
-            fitnessCenterController.fetchFitnessCenterInfo(fitnessCenterModel);
-
-            this.DataContext = fitnessCenterModel;
+            this.DataContext = new {fitnessCenterModel, addressModel};
         }
 
+        private void LoadFitnessCenterViewGuestMode()
+        {
+            btnViewInstructorsInfo.Visibility = Visibility.Visible;
+        }
+
+        private void LoadFintessCenterViewRegisteredUserMode()
+        {
+            if (LoggedInUserModel.userType.Equals(EUserType.Administrator))
+            {
+                txtFitnessCenterPassword.IsReadOnly = false;
+                txtFitnessCenterName.IsReadOnly = false;
+
+                btnEditFitnessCenterAddressInfo.Visibility = Visibility.Visible;
+                btnSaveFitnessCenterInfo.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void btnViewInstructorsInfo_Click(object sender, RoutedEventArgs e)
+        {
+            ViewInstructorsInfoView viewInstructorsInfoView = new ViewInstructorsInfoView();
+
+            viewInstructorsInfoView.ShowDialog();
+        }
+        private void btnSaveFitnessCenterInfo_Click(object sender, RoutedEventArgs e)
+        {
+            fitnessCenterController.ChangeFitnessCenterInfo(fitnessCenterModel, addressModel);
+        }
+
+        private void btnEditFitnessCenterAddressInfo_Click(object sender, RoutedEventArgs e)
+        {
+            fitnessCenterGrid.RowDefinitions[6].Height = new GridLength(275);
+
+            this.txtFitnessCenterAddress.Visibility = Visibility.Collapsed;
+
+            this.editAddressCenterInfo.Visibility = Visibility.Visible;
+
+            this.btnEditFitnessCenterAddressInfo.IsEnabled = false;
+        }
     }
 }

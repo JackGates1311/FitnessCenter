@@ -32,12 +32,5 @@ namespace Fitness_Center.Views
             loginView.Show();
         }
 
-        private void btnViewInstructorsInfo_Click(object sender, RoutedEventArgs e)
-        {
-            ViewInstructorsInfoView viewInstructorsInfoView = new ViewInstructorsInfoView();
-
-            viewInstructorsInfoView.ShowDialog();
-
-        }
     }
 }

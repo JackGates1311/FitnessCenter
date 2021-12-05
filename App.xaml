@@ -111,17 +111,6 @@
 
             </Style>
 
-            <Style x:Key="textBoxLargeReadOnly" TargetType="TextBox">
-
-                <Setter Property="Height" Value="28"/>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
-                <Setter Property="Width" Value="425"/>
-                <Setter Property="MaxWidth" Value="500"/>
-                <Setter Property="IsReadOnly" Value="True"/>
-                <Setter Property="TextAlignment" Value="Center"/>
-
-            </Style>
-
             <Style x:Key="passwordBoxLarge" TargetType="PasswordBox">
 
                 <Setter Property="Height" Value="28"/>
@@ -168,6 +157,18 @@
                 <Setter Property="MaxWidth" Value="500"/>
                 <Setter Property="Validation.ErrorTemplate" Value="{StaticResource validationErrorTemplate}"/>
 
+            </Style>
+
+            <Style x:Key="textBoxLargeReadOnlyValidated" TargetType="TextBox">
+
+                <Setter Property="Height" Value="28"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Width" Value="425"/>
+                <Setter Property="MaxWidth" Value="500"/>
+                <Setter Property="IsReadOnly" Value="True"/>
+                <Setter Property="TextAlignment" Value="Center"/>
+                <Setter Property="Validation.ErrorTemplate" Value="{StaticResource validationErrorTemplate}"/>
+                
             </Style>
 
             <Style x:Key="passwordBoxLargeValidated" TargetType="PasswordBox">

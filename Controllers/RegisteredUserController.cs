@@ -77,7 +77,7 @@ public class RegisteredUserController {
 
         DataTable dt = connection.performQuery(query);
 
-        MessageBox.Show("Podaci su uspešno izmenjeni!");
+        MessageBox.Show("Podaci o ulogovanom korisniku su uspešno izmenjeni!");
 
     }
 

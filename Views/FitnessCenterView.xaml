@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Fitness_Center.Views"
              mc:Ignorable="d" Background="White"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid x:Name="fitnessCenterGrid">
 
         <Grid.ColumnDefinitions>
 
@@ -26,6 +26,8 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
 
         </Grid.RowDefinitions>
 
@@ -33,15 +35,88 @@
 
         <Label Grid.Row="1" Grid.Column="1" Content="Šifra: "/>
 
-        <TextBox x:Name="txtFitnessCenterPassword" Style="{StaticResource textBoxLargeReadOnly}" Text="{Binding Id}" Grid.Row="2" Grid.Column="1"  />
+        <TextBox x:Name="txtFitnessCenterPassword" Style="{StaticResource textBoxLargeReadOnlyValidated}" Text="{Binding UpdateSourceTrigger=PropertyChanged, 
+            Path=fitnessCenterModel.Id, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Grid.Row="2" Grid.Column="1"  />
 
         <Label Grid.Row="3" Grid.Column="1" Content="Naziv centra: "/>
 
-        <TextBox x:Name="txtFitnessCenterName" Style="{StaticResource textBoxLargeReadOnly}" Text="{Binding CenterName}" Grid.Row="4" Grid.Column="1" />
+        <TextBox x:Name="txtFitnessCenterName" Style="{StaticResource textBoxLargeReadOnlyValidated}" Text="{Binding UpdateSourceTrigger=PropertyChanged, 
+            Path=fitnessCenterModel.CenterName, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Grid.Row="4" Grid.Column="1" />
 
         <Label Grid.Row="5" Grid.Column="1"  Content="Adresa centra: "/>
 
-        <TextBox x:Name="txtFitnessCenterAddress" Style="{StaticResource textBoxLargeReadOnly}" Text="{Binding Address}" Grid.Row="6" Grid.Column="1" />
+        <TextBox x:Name="txtFitnessCenterAddress" Style="{StaticResource textBoxLargeReadOnlyValidated}" Text="{Binding UpdateSourceTrigger=PropertyChanged, 
+            Path=fitnessCenterModel.Address, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Grid.Row="6" Grid.Column="1" />
 
+        <Button x:Name="btnViewInstructorsInfo" Grid.Row="7" Grid.Column="1" Click="btnViewInstructorsInfo_Click" Content="Instruktori" Width="425" Visibility="Collapsed"/>
+
+        <Button x:Name="btnEditFitnessCenterAddressInfo" Grid.Row="7" Grid.Column="1" Click="btnEditFitnessCenterAddressInfo_Click" Content="Izmeni podatke o adresi" Width="425" Visibility="Collapsed" />
+
+        <StackPanel x:Name="editAddressCenterInfo" Grid.Row="6" Grid.Column="1" Visibility="Collapsed">
+
+            <Label Content="Država: "/>
+
+            <TextBox x:Name="txtCountry" Style="{StaticResource textBoxLargeValidated}"
+                 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=addressModel.Country,
+                 ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
+
+            <Label Content="Grad: "/>
+
+            <TextBox x:Name="txtCity" Style="{StaticResource textBoxLargeValidated}"
+                 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=addressModel.City,
+                 ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
+
+            <Label Grid.Row="5" Grid.Column="2"  Content="Ulica: "/>
+
+            <TextBox x:Name="txtStreet" Style="{StaticResource textBoxLargeValidated}"
+                 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=addressModel.Street,
+                 ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
+
+            <Label Content="Broj: "/>
+
+            <TextBox x:Name="txtStreetNum" Style="{StaticResource textBoxLargeValidated}"
+                 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=addressModel.Number,
+                 ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+            
+        </StackPanel>
+
+
+        <Button x:Name="btnSaveFitnessCenterInfo" Grid.Row="8" Grid.Column="1" Click="btnSaveFitnessCenterInfo_Click" Content="Sačuvaj izmene" Width="425" IsDefault="True" Visibility="Collapsed">
+
+            <Button.Style>
+
+                <Style TargetType="Button">
+
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Setter Property="Height" Value="30"/>
+
+                    <Style.Triggers>
+
+                        <MultiDataTrigger>
+
+                            <MultiDataTrigger.Conditions>
+
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtFitnessCenterPassword}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtFitnessCenterName}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtCountry}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtCity}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtStreet}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtStreetNum}" Value="False"/>
+
+                            </MultiDataTrigger.Conditions>
+
+                            <Setter Property="IsEnabled" Value="True"/>
+
+                        </MultiDataTrigger>
+
+                    </Style.Triggers>
+
+                </Style>
+
+            </Button.Style>
+
+        </Button>
+        
     </Grid>
+    
 </UserControl>

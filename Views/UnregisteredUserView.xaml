@@ -8,25 +8,8 @@
         Title="Fitnes centar - Prijavljeni ste kao gost" Height="400" Width="700" >
     <Grid>
 
-        <Grid.ColumnDefinitions>
+        <local:FitnessCenterView/>
 
-            <ColumnDefinition Width="*"/>
-
-        </Grid.ColumnDefinitions>
-
-        <Grid.RowDefinitions>
-
-            <RowDefinition Height="275"/>
-            <RowDefinition Height="70"/>
-
-        </Grid.RowDefinitions>
-
-        <StackPanel Grid.Row="0" Grid.Column="0">
-
-            <local:FitnessCenterView/>
-        </StackPanel>
-        
-        <Button x:Name="btnViewInstructorsInfo" Grid.Row="1" Grid.Column="0" Click="btnViewInstructorsInfo_Click" Content="Instruktori" Width="250"/>
-        
     </Grid>
+    
 </Window>
