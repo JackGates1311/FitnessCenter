@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fitness_Center.Views"
-        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="Glavni meni" Height="450" Width="800">
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" MinHeight="725" MinWidth="1100"
+        Title="Fitnes centar - Prijavljeni ste kao korisnik" Height="725" Width="1100">
     
     <Grid>
 
@@ -29,20 +29,45 @@
         <Button x:Name="btnLogout" Style="{StaticResource buttonSmall}" Grid.Row="0" Grid.Column="2" Click="btnLogout_Click" Content="Odjava" />
 
         <TabControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
-            
+
             <TabItem>
-            
+
                 <TabItem.Header>
-                    
+
                     <StackPanel Orientation="Horizontal">
 
                         <Label Content="O fitnes centru" />
-                        
+
                     </StackPanel>
-                    
+
                 </TabItem.Header>
 
-                <local:FitnessCenterView/>
+                <AdornerDecorator>
+                    
+                    <local:FitnessCenterView/>
+
+                </AdornerDecorator>
+                
+            </TabItem>
+
+
+            <TabItem>
+
+                <TabItem.Header>
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <Label Content="Moj profil" />
+
+                    </StackPanel>
+
+                </TabItem.Header>
+
+                <AdornerDecorator>
+
+                    <local:UserInfoView/>
+
+                </AdornerDecorator>
                 
             </TabItem>
 
@@ -52,15 +77,20 @@
 
                     <StackPanel Orientation="Horizontal">
 
-                        <Label Content="Svi instruktori" />
+                        <Label Content="Instruktori" />
 
                     </StackPanel>
 
                 </TabItem.Header>
 
-                <!-- USER CONTROL HERRE-->
+                <AdornerDecorator>
+                    
+                    <local:InstructorsInfoView/>
 
+                </AdornerDecorator>
+            
             </TabItem>
+
 
         </TabControl>
 

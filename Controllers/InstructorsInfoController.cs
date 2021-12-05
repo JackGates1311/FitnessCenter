@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace Fitness_Center.Controllers
 {
-    class ViewInstructorsInfoController
+    class InstructorsInfoController
     {
         public void loadInstructorData(DataGrid table, String Name, String Surname, String Email, String Street)
         {

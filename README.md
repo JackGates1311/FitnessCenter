@@ -21,11 +21,11 @@ Aplikacija podržava sledeće funkcionalnosti:
 
 1. {+ Neregistrovani korisnik ima mogućnost pregleda osnovnih informacija o fitnes centru i o instruktorima koji rade u njemu. Nema mogućnost zakazivanja treninga. +}
 
-2. Omogućiti neregistrovanim korisnicima (polaznicima) mogućnost registracije na sistem. Prilikom registracije unose se - ime, prezime, JMBG (jedinstven), pol, adresa, email, lozinka. Za novog korisnika se automatski formira prazna lista treninga (lista podrazumeva prikaz svih treninga koje je polaznik rezervisao).
+2. {+ Omogućiti neregistrovanim korisnicima (polaznicima) mogućnost registracije na sistem. Prilikom registracije unose se - ime, prezime, JMBG (jedinstven), pol, adresa, email, lozinka. Za novog korisnika se automatski formira prazna lista treninga (lista podrazumeva prikaz svih treninga koje je polaznik rezervisao) +}.
 
-3. Omogućiti registrovanim korisnicima da se prijave i odjave sa sistema. Prilikom prijave na sistem korisnik unosi JMBG i lozinku sa kojima se registrovao.
+3. {+ Omogućiti registrovanim korisnicima da se prijave i odjave sa sistema. Prilikom prijave na sistem korisnik unosi JMBG i lozinku sa kojima se registrovao. +}
 
-4. Svi registrovani korisnici imaju pregled svojih ličnih podataka i mogućnost izmene istih.
+4. {+ Svi registrovani korisnici imaju pregled svojih ličnih podataka i mogućnost izmene istih. +}
 
 5. Administrator-ima mogućnost pregleda svih entiteta. Sve podatke može da doda, izmeni i obriše. Sva brisanja su logička (podatak postaje neaktivan i više se ne prikazuje, ne može se obrisati i izmeniti). Može da briše Treninge bez obzira da li su REZERVISANI ili SLOBODNI. Kreira inicijalno SLOBODNE treninge instruktorima. Samo administratori mogu da registruju nove instruktore.
 

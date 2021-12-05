@@ -1,4 +1,5 @@
 ﻿using Fitness_Center.Controllers;
+using Fitness_Center.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,17 +20,13 @@ namespace Fitness_Center.Views
     public partial class RegisterNewUserView : Window
     {
 
-        RegisteredUserModel registeredUserModel = new RegisteredUserModel();
-
-        AddressModel addressModel = new AddressModel();
-
         public RegisterNewUserView()
         {
+            UserViewModel.userInfoViewMode = EUserInfoViewMode.Add;
+
             InitializeComponent();
 
             this.Closed += new EventHandler(MainWindow_Closed);
-
-            this.DataContext = new { registeredUserModel, addressModel };
 
         }
 
@@ -38,13 +35,6 @@ namespace Fitness_Center.Views
             LoginView loginView = new LoginView();
 
             loginView.Show();
-        }
-
-        private void btnRegister_Click(object sender, RoutedEventArgs e)
-        {
-
-            MessageBox.Show(cmbBoxGender.SelectedIndex.ToString());
-            //MessageBox.Show(registeredUserModel.Name.ToString());
         }
     }
 }

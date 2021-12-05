@@ -5,75 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fitness_Center.Views"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="Fitnes centar - Prikaži informacije o instruktorima" Height="600" Width="1024">
-    
-    <Grid Margin="0,0,23,21">
+        Title="Fitnes centar - Instruktori" Height="600" Width="1024">
 
-        <Grid.ColumnDefinitions>
+    <local:InstructorsInfoView/>
 
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition Width="200*"/>
-
-        </Grid.ColumnDefinitions>
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-
-        <Label Style="{StaticResource labelBold}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Content="Prikaži informacije o instruktorima"/>
-
-        <Label Grid.Row="1" Grid.Column="0" Content="Ime: "/>
-
-        <TextBox x:Name="txtName" Grid.Row="2" Grid.Column="0"  />
-        
-        <Label Grid.Row="3" Grid.Column="0" Content="Prezime: "/>
-
-        <TextBox x:Name="txtSurname" Grid.Row="4" Grid.Column="0"  />
-        
-        <Label Grid.Row="5" Grid.Column="0" Content="Adresa: "/>
-
-        <TextBox x:Name="txtStreet" Grid.Row="6" Grid.Column="0" />
-
-        <Label Grid.Row="7" Grid.Column="0" Content="E-Mail adresa: "/>
-
-        <TextBox x:Name="txtEmail" Grid.Row="8" Grid.Column="0"  />
-
-        <Button x:Name="btnSearch" Grid.Row="9" Grid.Column="0" Content="Pretraži" Click="btnSearch_Click" Width="250"  Margin="10" />
-
-        <Button x:Name="btnClearSearch" Grid.Row="10" Grid.Column="0" Content="Poništi pretragu" Click="btnClearSearch_Click" Width="250"  Margin="10" />
-
-        <DataGrid x:Name="tableInstructors" IsReadOnly="True" Grid.Row="2" Grid.Column="2" Grid.RowSpan="10">
-            
-            <DataGrid.Columns>
-
-                <DataGridTextColumn Width ="20*" Header="Ime" Binding="{Binding Name}" />
-                <DataGridTextColumn Width ="30*" Header="Prezime" Binding="{Binding Surname}" />
-                <DataGridTextColumn Width ="50*" Header="Email" Binding="{Binding Email}" />
-                <DataGridTextColumn Width ="25*" Header="Država" Binding="{Binding Country}" />
-                <DataGridTextColumn Width ="25*" Header="Grad" Binding="{Binding City}" />
-                <DataGridTextColumn Width ="50*" Header="Ulica" Binding="{Binding Street}" />
-                <DataGridTextColumn Width ="10*" Header="Broj" Binding="{Binding AddressNumber}" />
-                
-
-            </DataGrid.Columns>
-
-        </DataGrid>
-
-
-
-
-    </Grid>
-    
 </Window>

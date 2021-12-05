@@ -18,13 +18,26 @@ namespace Fitness_Center.Views
     /// </summary>
     public partial class LoggedInUserView : Window
     {
+        RegisteredUserController registeredUserController = new RegisteredUserController();
+
         public LoggedInUserView()
         {
+            UserViewModel.userInfoViewMode = EUserInfoViewMode.Edit;
+
             InitializeComponent();
 
             this.Closed += new EventHandler(MainWindow_Closed);
 
-            lblUserName.Content = "Dobrodošli, prijavljeni ste kao '" + LoggedInUserModel.userName + "'";
+            lblUserName.Content = "Dobrodošli, prijavljeni ste kao '" + LoggedInUserModel.userName;
+
+            if (LoggedInUserModel.userType.Equals(EUserType.Instructor))
+                lblUserName.Content += "' (" + "Insktruktor" + ")";
+            else if (LoggedInUserModel.userType.Equals(EUserType.Customer))
+                lblUserName.Content += "' (" + "Polaznik" + ")";
+            else
+                lblUserName.Content += "' (" + "Administrator" + ")";
+
+
         }
 
         private void MainWindow_Closed(object sender, EventArgs e)

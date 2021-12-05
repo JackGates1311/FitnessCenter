@@ -42,7 +42,12 @@ public class LoginController {
             {
                 LoggedInUserModel.userName = userName;
 
-                // HERE ADD userTzpe
+                if (dt.Rows[0]["UserType"].Equals("Administrator"))
+                    LoggedInUserModel.userType = EUserType.Administrator;
+                else if (dt.Rows[0]["UserType"].Equals("Instructor"))
+                    LoggedInUserModel.userType = EUserType.Instructor;
+                else
+                    LoggedInUserModel.userType = EUserType.Customer;
 
                 return true;
             }
@@ -53,11 +58,6 @@ public class LoginController {
         else
             return false;
   
-    }
-
-    protected void registerNewUser(String name, String surname, String JMBG, String email, String userName, String password, EGender gender) {
-        // TODO implement here
-        return;
     }
 
 }

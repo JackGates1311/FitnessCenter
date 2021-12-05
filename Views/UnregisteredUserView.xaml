@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fitness_Center.Views"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" MinHeight="375" MinWidth="700"
-        Title="Fitnes centar - Prijavljeni ste kao gost" Height="375" Width="700" >
+        Title="Fitnes centar - Prijavljeni ste kao gost" Height="400" Width="700" >
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -26,7 +26,7 @@
             <local:FitnessCenterView/>
         </StackPanel>
         
-        <Button x:Name="btnViewInstructorsInfo" Grid.Row="1" Grid.Column="0" Click="btnViewInstructorsInfo_Click" Content="Prikaži informacije o instruktorima" Width="250"/>
+        <Button x:Name="btnViewInstructorsInfo" Grid.Row="1" Grid.Column="0" Click="btnViewInstructorsInfo_Click" Content="Instruktori" Width="250"/>
         
     </Grid>
 </Window>
