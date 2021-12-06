@@ -31,13 +31,23 @@ namespace Fitness_Center.Views
             lblUserName.Content = "Dobrodošli, prijavljeni ste kao '" + LoggedInUserModel.userName;
 
             if (LoggedInUserModel.userType.Equals(EUserType.Instructor))
+            {
                 lblUserName.Content += "' (" + "Insktruktor" + ")";
+            }
             else if (LoggedInUserModel.userType.Equals(EUserType.Customer))
+            {
                 lblUserName.Content += "' (" + "Polaznik" + ")";
+            }
             else
+            {
                 lblUserName.Content += "' (" + "Administrator" + ")";
+                ViewAdministratorTabItems();
+            }
+        }
 
-
+        private void ViewAdministratorTabItems()
+        {
+            workoutViewTabItem.Visibility = Visibility.Visible;
         }
 
         private void MainWindow_Closed(object sender, EventArgs e)

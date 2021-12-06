@@ -91,6 +91,25 @@
             
             </TabItem>
 
+            <TabItem x:Name="workoutViewTabItem" Visibility="Collapsed">
+
+                <TabItem.Header>
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <Label Content="Treninzi" />
+
+                    </StackPanel>
+
+                </TabItem.Header>
+
+                <AdornerDecorator>
+
+                    <local:WorkoutView/>
+
+                </AdornerDecorator>
+
+            </TabItem>
 
         </TabControl>
 

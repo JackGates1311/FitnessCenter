@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="Fitness_Center.Views.WorkoutView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:Fitness_Center.Views"
+             mc:Ignorable="d" Background="White"
+             d:DesignHeight="450" d:DesignWidth="800">
+    
+    <Grid Margin="0,0,23,21">
+
+
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="200*"/>
+
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            
+        </Grid.RowDefinitions>
+
+        <Label Style="{StaticResource labelBold}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Content="Treninzi"/>
+        
+        <Button x:Name="btnAddWorkout" Grid.Row="2" Grid.Column="0" Content="Dodaj trening" Click="btnAddWorkout_Click" Width="250" Margin="0" />
+
+        <Button x:Name="btnEditWorkout" Grid.Row="3" Grid.Column="0" Content="Izmeni izabrani trening" Click="btnEditWorkout_Click" Width="250"  Margin="10" />
+
+        <Button x:Name="btnDeleteWorkout" Grid.Row="4" Grid.Column="0" Content="Obriši izabrani trening" Click="btnDeleteWorkout_Click" Width="250"  Margin="10" />
+
+        <DataGrid x:Name="tableWorkouts" IsReadOnly="True" Grid.Row="2" Grid.Column="2" Grid.RowSpan="4">
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Width ="15*" Header="ID" Binding="{Binding WorkoutId}" />
+                <DataGridTextColumn Width ="30*" Header="Datum" Binding="{Binding Path=Date, StringFormat='{}{0:dd.MM.yyyy.}'}" />
+                <DataGridTextColumn Width ="30*" Header="Vreme" Binding="{Binding Path=Time}" />
+                <DataGridTextColumn Width ="30*" Header="Dužina trajanja" Binding="{Binding Length}" />
+                <DataGridTextColumn Width ="25*" Header="Status" Binding="{Binding WorkoutStatus}" />
+                <DataGridTextColumn Width ="37*" Header="Instruktor" Binding="{Binding InstructorUserName}" />
+                <DataGridTextColumn Width ="38*" Header="Polaznik" Binding="{Binding CustomerUserName}" />
+                <DataGridCheckBoxColumn Width ="30*" Header="Obrisan" Binding="{Binding IsRemoved}" />
+
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+    </Grid>
+</UserControl>

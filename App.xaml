@@ -131,6 +131,18 @@
 
             </Style>
 
+            <Style TargetType="{x:Type DatePicker}">
+
+                <Setter Property="Width" Value="225"/>
+                <Setter Property="Height" Value="35"/>
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="Focusable" Value="false" />
+                <Setter Property="FirstDayOfWeek" Value="Monday" />
+
+            </Style>
+
             <ControlTemplate x:Key="validationErrorTemplate">
 
                 <DockPanel>
