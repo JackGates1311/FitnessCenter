@@ -11,9 +11,9 @@ public class WorkoutModel {
 
     private int id;
 
-    private DateTime date;
+    private DateTime dateTimeStart;
 
-    private DateTime time;
+    private DateTime dateTimeEnd;
 
     private int length;
 
@@ -26,8 +26,8 @@ public class WorkoutModel {
     private Boolean isRemoved;
 
     public int Id { get => id; set => id = value; }
-    public DateTime Date { get => date; set => date = value; }
-    public DateTime Time { get => time; set => time = value; }
+    public DateTime DateTimeStart { get => dateTimeStart; set => dateTimeStart = value; }
+    public DateTime DateTimeEnd { get => dateTimeEnd; set => dateTimeEnd = value; }
     public int Length { get => length; set => length = value; }
     public EWorkoutStatus WorkoutStatus { get => workoutStatus; set => workoutStatus = value; }
     public string Instructor { get => instructor; set => instructor = value; }

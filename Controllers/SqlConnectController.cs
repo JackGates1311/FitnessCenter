@@ -24,7 +24,8 @@ namespace Fitness_Center.Controllers
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.ToString());
+                MessageBox.Show("Greška prilikom ostvarivanja konekcije sa bazom podataka. \n Detalji\n\n: " + ex.ToString(), "Greška - Fitnes centar",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

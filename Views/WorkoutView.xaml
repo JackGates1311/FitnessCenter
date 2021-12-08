@@ -40,10 +40,9 @@
 
             <DataGrid.Columns>
 
-                <DataGridTextColumn Width ="15*" Header="ID" Binding="{Binding WorkoutId}" />
-                <DataGridTextColumn Width ="30*" Header="Datum" Binding="{Binding Path=Date, StringFormat='{}{0:dd.MM.yyyy.}'}" />
-                <DataGridTextColumn Width ="30*" Header="Vreme" Binding="{Binding Path=Time}" />
-                <DataGridTextColumn Width ="30*" Header="Dužina trajanja" Binding="{Binding Length}" />
+                <DataGridTextColumn Width ="30*" Header="Datum" Binding="{Binding Path=DateTimeStart, StringFormat='{}{0:dd.MM.yyyy.}'}" />
+                <DataGridTextColumn Width ="30*" Header="Početak" Binding="{Binding Path=DateTimeStart, StringFormat='{}{0:HH:mm}'}" />
+                <DataGridTextColumn Width ="30*" Header="Završetak" Binding="{Binding Path=DateTimeEnd, StringFormat='{}{0:HH:mm}'}" />
                 <DataGridTextColumn Width ="25*" Header="Status" Binding="{Binding WorkoutStatus}" />
                 <DataGridTextColumn Width ="37*" Header="Instruktor" Binding="{Binding InstructorUserName}" />
                 <DataGridTextColumn Width ="38*" Header="Polaznik" Binding="{Binding CustomerUserName}" />

@@ -50,7 +50,7 @@ namespace Fitness_Center.Views
             this.DataContext = new {registeredUserModel, addressModel};
         }
 
-        private void CloseParentWindow()
+        public void CloseParentWindow()
         {
             var myWindow = Window.GetWindow(this);
 
@@ -101,16 +101,10 @@ namespace Fitness_Center.Views
             SetRegisteredUserGender();
 
             if (UserViewModel.userInfoViewMode.Equals(EUserInfoViewMode.Add))
-            {
-                unregistredUserController.registerNewUser(registeredUserModel, addressModel);
+                unregistredUserController.registerNewUser(registeredUserModel, addressModel, this);
 
-                CloseParentWindow();
-
-            }
             if (UserViewModel.userInfoViewMode.Equals(EUserInfoViewMode.Edit))
-            {
                 registeredUserController.changeRegisteredUserInfo(registeredUserModel, addressModel);
-            }
         }
 
     }

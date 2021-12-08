@@ -9,9 +9,11 @@ namespace Fitness_Center.Controllers
 {
     class WorkoutController
     {
+
+        SqlConnectController connection = new SqlConnectController();
         public void LoadWorkouts(DataGrid table)
         {
-            var query = "SELECT * from Workouts;";
+            var query = "SELECT * from Workouts ORDER BY DateTimeStart;";
 
             SqlConnectController connection = new SqlConnectController();
 
@@ -47,6 +49,8 @@ namespace Fitness_Center.Controllers
             for (int i = 30; i <= 300; i += 30)
                 cmbBox.Items.Add(i);
 
+            cmbBox.SelectedIndex = 3;
+
             return cmbBox;
         }
 
@@ -61,20 +65,39 @@ namespace Fitness_Center.Controllers
             }
         }
 
+        public Boolean CheckForDuplicate(WorkoutModel workout) 
+        {
+            var queryCheckForDuplicates = "SELECT * from Workouts WHERE (Workouts.InstructorUserName LIKE '" + workout.Instructor + "') " +
+                "AND (DateTimeStart between '" + workout.DateTimeStart.ToString("yyyy-MM-dd HH:mm") + "' " +
+                "AND '" + workout.DateTimeEnd.ToString("yyyy-MM-dd HH:mm") + "' OR DateTimeEnd between '" + workout.DateTimeStart.ToString("yyyy-MM-dd HH:mm") +
+                "' AND '" + workout.DateTimeEnd.ToString("yyyy-MM-dd HH:mm") + "'); ";
+
+            connection.openConnection();
+
+            if (connection.performQuery(queryCheckForDuplicates).Rows.Count > 0)
+            {
+                    MessageBox.Show("Trening se u navedenom terminu preklapa sa nekim od postojećih treninga za izabranog instruktora", "Upozorenje - Fitnes centar",
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                    return true;
+            }
+            else
+                    return false;
+
+        }
+
         internal void AddWorkout(WorkoutModel workout)
         {
             var query = "INSERT into Workouts VALUES((SELECT MAX(WorkoutId) as WorkoutId FROM Workouts) + 1, " +
-                "CONVERT(VARCHAR, '" + workout.Date.ToString("yyyy-MM-dd") + "')" + ", '" + workout.Time.ToString("HH:mm") + "', '" + 
-                workout.Length + "', 'Available', " + "'" + workout.Instructor + "', '', 0)";
-
-            SqlConnectController connection = new SqlConnectController();
+                "CONVERT(VARCHAR, '" + workout.DateTimeStart.ToString("yyyy-MM-dd HH:mm") + "')" + ", '" + workout.DateTimeEnd.ToString("yyyy-MM-dd HH:mm") +
+                "', '" + workout.Length + "', 'Available', " + "'" + workout.Instructor + "', '', 0)";
             
             connection.openConnection();
 
             DataTable dt = connection.performQuery(query);
 
-            MessageBox.Show("Termin za trening je uspešno kreiran!");
-
+            MessageBox.Show("Termin za trening je uspešno kreiran!", "Obaveštenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Information);
+            
         }
     }
 }

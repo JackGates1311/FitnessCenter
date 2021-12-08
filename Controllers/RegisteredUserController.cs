@@ -77,14 +77,8 @@ public class RegisteredUserController {
 
         DataTable dt = connection.performQuery(query);
 
-        MessageBox.Show("Podaci o ulogovanom korisniku su uspešno izmenjeni!");
+        MessageBox.Show("Podaci o ulogovanom korisniku su uspešno izmenjeni!", "Obaveštenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Information);
 
-    }
-
-    protected void logoutFromSystem() 
-    {
-        // TODO implement here
-        return;
     }
 
 }

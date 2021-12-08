@@ -20,14 +20,17 @@ namespace Fitness_Center.Views
     public partial class AddWorkoutInfoView : Window
     {
         WorkoutController workoutController = new WorkoutController();
+
+        DateTime selectedDateTimeStart;
+        DateTime selectedDateTimeEnd;
         WorkoutModel workout = new WorkoutModel();
 
         public AddWorkoutInfoView()
         {
             InitializeComponent();
 
-            timePickerWorkout.Text = "00:00";
-        
+            timePickerWorkout.Text = DateTime.Now.AddMinutes(15).ToString("HH:mm");
+
             cmbBoxInstructor = workoutController.GetAllInstructorUserName(cmbBoxInstructor);
 
             cmbBoxLength = workoutController.FillComboBoxLength(cmbBoxLength);
@@ -39,28 +42,45 @@ namespace Fitness_Center.Views
             e.Cancel = true;
         }
 
+        private Boolean CheckForValidDateTimeInput()
+        {
+            DateTime todayDateTime = DateTime.Now.AddMinutes(15);
+            DateTime selectedStartDate = datePickerWorkout.SelectedDate.Value;
+            DateTime selectedStartTime = DateTime.Parse(timePickerWorkout.Value.ToString());
+
+            selectedDateTimeStart = DateTime.Parse(selectedStartDate.ToString("yyyy-MM-dd") + selectedStartTime.ToString(" HH:mm:ss"));
+            selectedDateTimeEnd = selectedDateTimeStart.AddMinutes(int.Parse(cmbBoxLength.SelectedItem.ToString()));
+
+            if (todayDateTime.ToString("yyyy-MM-dd") == selectedStartDate.ToString("yyyy-MM-dd") && todayDateTime > selectedStartTime)
+            {
+                MessageBox.Show("Izabrali ste datum i vreme koji su već prošli ili su jako blizu da prođu u odnosu na trenutno.", "Upozorenje - Fitnes centar",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                timePickerWorkout.Text = DateTime.Now.AddMinutes(15).ToString("HH:mm");
+
+                return false;
+            }
+
+            return true;
+        }
+
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            workout.Time = DateTime.Parse(timePickerWorkout.Value.ToString());
-
-            try
-            {
-                workout.Time = DateTime.Parse(timePickerWorkout.Value.ToString());
-            }
-            catch 
-            {
-                MessageBox.Show("Molimo unesite vreme da bi ste kreirali trening");
-
+            if (CheckForValidDateTimeInput() == false)
                 return;
-            }
 
-            workout.Date = datePickerWorkout.SelectedDate.Value;
+            workout.DateTimeStart = selectedDateTimeStart;
+            workout.DateTimeEnd = selectedDateTimeEnd;
             workout.Length = int.Parse(cmbBoxLength.SelectedItem.ToString());
             workout.Instructor = (string)cmbBoxInstructor.SelectedItem;
 
-            workoutController.AddWorkout(workout);
+            if (workoutController.CheckForDuplicate(workout).Equals(false))
+            {
+                workoutController.AddWorkout(workout);
 
-            this.Close();
+                this.Close();
+            }
+
         }
     }
 }

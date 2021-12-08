@@ -16,8 +16,7 @@ public class UnregisteredUserController
 
     }
 
-
-    public void registerNewUser(RegisteredUserModel user, AddressModel address)
+    public void registerNewUser(RegisteredUserModel user, AddressModel address, Fitness_Center.Views.UserInfoView userInfoView)
     {
         var query = "INSERT INTO Users values ('" + user.Name + "', '" + user.Surname + "', '" + user.JMBG + "', " +
             "'" + user.Email + "', (SELECT MAX(AddressId) as AddressId FROM Users) + 1, '" + user.UserName + "', '" + user.Password + "', " +
@@ -29,9 +28,21 @@ public class UnregisteredUserController
 
         connection.openConnection();
 
-        DataTable dt = connection.performQuery(query);
+        try
+        {
+            DataTable dt = connection.performQuery(query);
 
-        MessageBox.Show("Korisnik je uspešno registrovan!");
+            MessageBox.Show("Korisnik je uspešno registrovan!", "Obaveštenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            userInfoView.CloseParentWindow();
+        }
+        catch
+        {
+            MessageBox.Show("Korisnik je veæ registrovan sa istim korisnièkim imenom ili JMBG-om na sistem", "Upozorenje - Fitnes centar", 
+                MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+
+
     }
 
 }

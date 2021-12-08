@@ -39,7 +39,8 @@
 
         <Label Grid.Row="1" Grid.Column="2" Content="Vreme (HH:MM): "/>
 
-        <xctk:TimePicker x:Name="timePickerWorkout" Grid.Row="2" Grid.Column="2" Format="ShortTime" Width="225" Height="35" FontSize="18" TextAlignment="Center" />
+        <xctk:TimePicker x:Name="timePickerWorkout" Grid.Row="2" Grid.Column="2" TimeInterval="00:30:00" AllowTextInput="False" Format="ShortTime" 
+                         Width="225" Height="35" FontSize="18" TextAlignment="Center" />
 
         <Label Grid.Row="3" Grid.Column="1" Content="Dužina trajanja (min): "/>
 
