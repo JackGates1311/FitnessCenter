@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 
 public class RegisteredUserController {
 
@@ -17,7 +18,7 @@ public class RegisteredUserController {
 
     }
 
-    public void getRegisteredUserInfo(RegisteredUserModel user, AddressModel address) 
+    public void GetRegisteredUserInfo(RegisteredUserModel user, AddressModel address) 
     {
 
         var query = "select Users.Name, Users.Surname, Users.JMBG, Users.Email, Users.AddressId, Users.UserName, Users.Password, " +
@@ -61,7 +62,25 @@ public class RegisteredUserController {
         connection.CloseConnection();
     }
 
-    public void changeRegisteredUserInfo(RegisteredUserModel user, AddressModel address) 
+    public void LoadUserData(DataGrid table)
+    {
+        var query = "SELECT Users.Name, Users.Surname, Users.JMBG, Users.Email, Users.UserName, Users.Password, Users.Gender, Users.UserType, " +
+            "Addresses.Country, Addresses.City, Addresses.Street, Addresses.AddressNumber, Users.IsRemoved " +
+            "FROM Users INNER JOIN Addresses ON Addresses.AddressId = Users.AddressId ";
+
+        SqlConnectController connection = new SqlConnectController();
+
+        connection.OpenConnection();
+
+        DataTable dt = connection.PerformQuery(query);
+
+        table.ItemsSource = dt.DefaultView;
+
+        connection.CloseConnection();
+
+    }
+
+    public void ChangeRegisteredUserInfo(RegisteredUserModel user, AddressModel address) 
     {
         var query = "UPDATE Users SET Name = '" + user.Name + "', " + "Surname = '" + user.Surname + "', " +
             "Email = '" + user.Email + "', Password = '" + user.Password + "', Gender = '" + user.Gender.ToString() + "' " +

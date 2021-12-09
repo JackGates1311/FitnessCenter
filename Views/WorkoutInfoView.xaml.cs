@@ -67,7 +67,7 @@ namespace Fitness_Center.Views
             selectedDateTimeStart = DateTime.Parse(selectedStartDate.ToString("yyyy-MM-dd") + selectedStartTime.ToString(" HH:mm:ss"));
             selectedDateTimeEnd = selectedDateTimeStart.AddMinutes(int.Parse(cmbBoxLength.SelectedItem.ToString()));
 
-            if (todayDateTime.ToString("yyyy-MM-dd") == selectedStartDate.ToString("yyyy-MM-dd") && todayDateTime > selectedStartTime)
+            if (todayDateTime.AddMinutes(-15).ToString("yyyy-MM-dd") == selectedStartDate.ToString("yyyy-MM-dd") && todayDateTime > selectedStartTime)
             {
                 MessageBox.Show("Izabrali ste datum i vreme koji su već prošli ili su jako blizu da prođu u odnosu na trenutno.", "Upozorenje - Fitnes centar",
                     MessageBoxButton.OK, MessageBoxImage.Warning);

@@ -16,7 +16,7 @@ public class UnregisteredUserController
 
     }
 
-    public void registerNewUser(RegisteredUserModel user, AddressModel address, Fitness_Center.Views.UserInfoView userInfoView)
+    public void RegisterNewUser(RegisteredUserModel user, AddressModel address, Fitness_Center.Views.UserInfoView userInfoView)
     {
         var query = "INSERT INTO Users values ('" + user.Name + "', '" + user.Surname + "', '" + user.JMBG + "', " +
             "'" + user.Email + "', (SELECT MAX(AddressId) as AddressId FROM Users) + 1, '" + user.UserName + "', '" + user.Password + "', " +

@@ -42,7 +42,7 @@ namespace Fitness_Center.Views
             {
                 LoadUserInfoViewEditMode();
 
-                registeredUserController.getRegisteredUserInfo(registeredUserModel, addressModel);
+                registeredUserController.GetRegisteredUserInfo(registeredUserModel, addressModel);
 
                 DetectRegisteredUserGender();
             }
@@ -101,10 +101,10 @@ namespace Fitness_Center.Views
             SetRegisteredUserGender();
 
             if (OperationModeModel.userInfoViewMode.Equals(EUserInfoViewOperationMode.Add))
-                unregistredUserController.registerNewUser(registeredUserModel, addressModel, this);
+                unregistredUserController.RegisterNewUser(registeredUserModel, addressModel, this);
 
             if (OperationModeModel.userInfoViewMode.Equals(EUserInfoViewOperationMode.Edit))
-                registeredUserController.changeRegisteredUserInfo(registeredUserModel, addressModel);
+                registeredUserController.ChangeRegisteredUserInfo(registeredUserModel, addressModel);
         }
 
     }

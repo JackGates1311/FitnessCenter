@@ -85,7 +85,7 @@
 
                 <AdornerDecorator>
                     
-                    <local:InstructorsInfoView/>
+                    <local:InstructorInfoView/>
 
                 </AdornerDecorator>
             
@@ -106,6 +106,26 @@
                 <AdornerDecorator>
 
                     <local:WorkoutView/>
+
+                </AdornerDecorator>
+
+            </TabItem>
+
+            <TabItem x:Name="userViewTabItem" Visibility="Collapsed">
+
+                <TabItem.Header>
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <Label Content="Korisnici" />
+
+                    </StackPanel>
+
+                </TabItem.Header>
+
+                <AdornerDecorator>
+
+                    <local:UserView/>
 
                 </AdornerDecorator>
 

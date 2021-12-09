@@ -84,14 +84,14 @@ namespace Fitness_Center.Controllers
 
         public Boolean CheckForDuplicateWorkout(WorkoutModel workout) 
         {
-            var queryCheckForDuplicates = "SELECT * from Workouts WHERE (Workouts.InstructorUserName LIKE '" + workout.Instructor + "') " +
-                "AND WorkoutId != '" + workout.Id + "' AND (DateTimeStart between '" + workout.DateTimeStart.ToString("yyyy-MM-dd HH:mm") + "' " +
+            var query = "SELECT * from Workouts WHERE (Workouts.InstructorUserName LIKE '" + workout.Instructor + "') " +
+                "AND WorkoutId != '" + workout.Id + "'AND IsRemoved = '0' AND (DateTimeStart between '" + workout.DateTimeStart.ToString("yyyy-MM-dd HH:mm") + "' " +
                 "AND '" + workout.DateTimeEnd.ToString("yyyy-MM-dd HH:mm") + "' OR DateTimeEnd between '" + workout.DateTimeStart.ToString("yyyy-MM-dd HH:mm") +
                 "' AND '" + workout.DateTimeEnd.ToString("yyyy-MM-dd HH:mm") + "'); ";
 
             connection.OpenConnection();
 
-            if (connection.PerformQuery(queryCheckForDuplicates).Rows.Count > 0)
+            if (connection.PerformQuery(query).Rows.Count > 0)
             {
                 MessageBox.Show("Trening se u navedenom terminu preklapa sa nekim od postojećih treninga za izabranog instruktora", "Upozorenje - Fitnes centar",
                         MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -199,33 +199,41 @@ namespace Fitness_Center.Controllers
 
             DataTable dt = connection.PerformQuery(query);
 
-            workoutInfoView.SelectedRowWorkoutId = SelectedRowWorkoutId;
+            if (DateTime.Now > DateTime.Parse(dt.Rows[0]["DateTimeEnd"].ToString()))
+            {
+                MessageBox.Show("Ovaj trening nije moguće izmeniti", "Upozorenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                workoutInfoView.Close();
+            }
+            else 
+            {
+                workoutInfoView.SelectedRowWorkoutId = SelectedRowWorkoutId;
 
-            workoutInfoView.Title = "Fitnes centar - Izmeni trening";
-            workoutInfoView.btnConfirm.Content = "Sačuvaj izmene";
-            workoutInfoView.lblTitle.Content = "Izmeni trening";
+                workoutInfoView.Title = "Fitnes centar - Izmeni trening";
+                workoutInfoView.btnConfirm.Content = "Sačuvaj izmene";
+                workoutInfoView.lblTitle.Content = "Izmeni trening";
 
-            workoutInfoView.workoutInfoViewGrid.RowDefinitions[5].Height = new GridLength(30);
-            workoutInfoView.workoutInfoViewGrid.RowDefinitions[6].Height = new GridLength(60);
-            workoutInfoView.workoutInfoViewWindow.Height = 440;
-            workoutInfoView.workoutInfoViewWindow.Width = 700;
+                workoutInfoView.workoutInfoViewGrid.RowDefinitions[5].Height = new GridLength(30);
+                workoutInfoView.workoutInfoViewGrid.RowDefinitions[6].Height = new GridLength(60);
+                workoutInfoView.workoutInfoViewWindow.Height = 440;
+                workoutInfoView.workoutInfoViewWindow.Width = 700;
 
-            workoutInfoView.lblWorkoutStatus.Visibility = Visibility.Visible;
-            workoutInfoView.cmbBoxWorkoutStatus.Visibility = Visibility.Visible;
-            workoutInfoView.lblCustomer.Visibility = Visibility.Visible;
-            workoutInfoView.cmbBoxCustomer.Visibility = Visibility.Visible;
+                workoutInfoView.lblWorkoutStatus.Visibility = Visibility.Visible;
+                workoutInfoView.cmbBoxWorkoutStatus.Visibility = Visibility.Visible;
+                workoutInfoView.lblCustomer.Visibility = Visibility.Visible;
+                workoutInfoView.cmbBoxCustomer.Visibility = Visibility.Visible;
 
-            workoutInfoView.datePickerWorkout.Text = dt.Rows[0]["DateTimeStart"].ToString();
-            workoutInfoView.timePickerWorkout.Text = DateTime.Parse(dt.Rows[0]["DateTimeStart"].ToString()).ToString("HH:mm");
-            workoutInfoView.cmbBoxLength.Text = dt.Rows[0]["Length"].ToString();
-            workoutInfoView.cmbBoxInstructor.Text = dt.Rows[0]["InstructorUserName"].ToString();
+                workoutInfoView.datePickerWorkout.Text = dt.Rows[0]["DateTimeStart"].ToString();
+                workoutInfoView.timePickerWorkout.Text = DateTime.Parse(dt.Rows[0]["DateTimeStart"].ToString()).ToString("HH:mm");
+                workoutInfoView.cmbBoxLength.Text = dt.Rows[0]["Length"].ToString();
+                workoutInfoView.cmbBoxInstructor.Text = dt.Rows[0]["InstructorUserName"].ToString();
 
-            if (dt.Rows[0]["WorkoutStatus"].ToString().Equals("Reserved"))
-                workoutInfoView.cmbBoxWorkoutStatus.Text = "Rezervisan";
-            else
-                workoutInfoView.cmbBoxWorkoutStatus.Text = "Slobodan";
+                if (dt.Rows[0]["WorkoutStatus"].ToString().Equals("Reserved"))
+                    workoutInfoView.cmbBoxWorkoutStatus.Text = "Rezervisan";
+                else
+                    workoutInfoView.cmbBoxWorkoutStatus.Text = "Slobodan";
 
-            workoutInfoView.cmbBoxCustomer.Text = dt.Rows[0]["CustomerUserName"].ToString();
+                workoutInfoView.cmbBoxCustomer.Text = dt.Rows[0]["CustomerUserName"].ToString();
+            }
 
             connection.CloseConnection();
 

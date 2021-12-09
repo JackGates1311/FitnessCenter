@@ -8,9 +8,9 @@ using System.Windows.Controls;
 
 namespace Fitness_Center.Controllers
 {
-    class InstructorsInfoController
+    class InstructorInfoController
     {
-        public void loadInstructorData(DataGrid table, String Name, String Surname, String Email, String Street)
+        public void LoadInstructorData(DataGrid table, String Name, String Surname, String Email, String Street)
         {
             var query = "SELECT Users.Name, Users.Surname, Users.Email, Addresses.Country, Addresses.City, Addresses.Street, " +
                 "Addresses.AddressNumber FROM Addresses inner join Users ON Addresses.AddressId = Users.AddressId where Users.UserType = 'Instructor' " +

@@ -17,25 +17,25 @@ namespace Fitness_Center.Views
     /// <summary>
     /// Interaction logic for InstructorsInfoView.xaml
     /// </summary>
-    public partial class InstructorsInfoView : UserControl
+    public partial class InstructorInfoView : UserControl
     {
 
-        InstructorsInfoController instructorsInfoController = new InstructorsInfoController();
+        InstructorInfoController instructorInfoController = new InstructorInfoController();
 
-        public InstructorsInfoView()
+        public InstructorInfoView()
         {
             InitializeComponent();
 
-            fillTableInstructors();
+            FillTableInstructors();
         }
 
-        private void fillTableInstructors()
+        private void FillTableInstructors()
         {
-            instructorsInfoController.loadInstructorData(tableInstructors, "", "", "", "");
+            instructorInfoController.LoadInstructorData(tableInstructors, "", "", "", "");
         }
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            instructorsInfoController.loadInstructorData(tableInstructors, txtName.Text, txtSurname.Text,
+            instructorInfoController.LoadInstructorData(tableInstructors, txtName.Text, txtSurname.Text,
                 txtEmail.Text, txtStreet.Text);
         }
 
@@ -46,7 +46,7 @@ namespace Fitness_Center.Views
             txtStreet.Clear();
             txtEmail.Clear();
 
-            fillTableInstructors();
+            FillTableInstructors();
         }
     }
 }

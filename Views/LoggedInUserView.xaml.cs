@@ -46,6 +46,7 @@ namespace Fitness_Center.Views
         private void ViewAdministratorTabItems()
         {
             workoutViewTabItem.Visibility = Visibility.Visible;
+            userViewTabItem.Visibility = Visibility.Visible;
         }
 
         private void MainWindow_Closed(object sender, EventArgs e)
