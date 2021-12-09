@@ -1,4 +1,5 @@
 ﻿using Fitness_Center.Controllers;
+using Fitness_Center.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +18,7 @@ namespace Fitness_Center.Views
     /// <summary>
     /// Interaction logic for AddWorkoutInfoView.xaml
     /// </summary>
-    public partial class AddWorkoutInfoView : Window
+    public partial class WorkoutInfoView : Window
     {
         WorkoutController workoutController = new WorkoutController();
 
@@ -25,15 +26,30 @@ namespace Fitness_Center.Views
         DateTime selectedDateTimeEnd;
         WorkoutModel workout = new WorkoutModel();
 
-        public AddWorkoutInfoView()
+        String selectedRowWorkoutId;
+        public string SelectedRowWorkoutId { get => selectedRowWorkoutId; set => selectedRowWorkoutId = value; }
+
+        public WorkoutInfoView()
         {
             InitializeComponent();
 
-            timePickerWorkout.Text = DateTime.Now.AddMinutes(15).ToString("HH:mm");
-
-            cmbBoxInstructor = workoutController.GetAllInstructorUserName(cmbBoxInstructor);
+            cmbBoxInstructor = workoutController.GetAllInstructorOrCustomerUserName(cmbBoxInstructor, "SELECT UserName from Users WHERE UserType = 'Instructor';");
 
             cmbBoxLength = workoutController.FillComboBoxLength(cmbBoxLength);
+
+            if (OperationModeModel.workoutInfoViewMode.Equals(EWorkoutInfoViewOperationMode.Add))
+            {
+                timePickerWorkout.Text = DateTime.Now.AddMinutes(15).ToString("HH:mm");
+
+            }
+            if (OperationModeModel.workoutInfoViewMode.Equals(EWorkoutInfoViewOperationMode.Edit))
+            {
+                cmbBoxWorkoutStatus = workoutController.FillCmbBoxWorkoutStatus(cmbBoxWorkoutStatus);
+
+                cmbBoxCustomer.Items.Add("");
+
+                cmbBoxCustomer = workoutController.GetAllInstructorOrCustomerUserName(cmbBoxCustomer, "SELECT UserName from Users WHERE UserType = 'Customer';");
+            }
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -64,23 +80,56 @@ namespace Fitness_Center.Views
             return true;
         }
 
+        private Boolean CheckForValidCheckBoxInput()
+        {
+            if ((cmbBoxWorkoutStatus.SelectedItem.Equals("Slobodan") && cmbBoxCustomer.SelectedItem.Equals("")) || (cmbBoxWorkoutStatus.SelectedItem.Equals("Rezervisan") &&
+                !cmbBoxCustomer.SelectedItem.Equals("")))
+                return true;
+            else 
+            {
+                MessageBox.Show("Izabrali ste nemoguću kombinaciju statusa treninga i izabranog polaznika", "Upozorenje - Fitnes centar",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+        }
+
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
             if (CheckForValidDateTimeInput() == false)
                 return;
 
+            workout.Id = Convert.ToInt32(selectedRowWorkoutId);
             workout.DateTimeStart = selectedDateTimeStart;
             workout.DateTimeEnd = selectedDateTimeEnd;
             workout.Length = int.Parse(cmbBoxLength.SelectedItem.ToString());
+
             workout.Instructor = (string)cmbBoxInstructor.SelectedItem;
 
-            if (workoutController.CheckForDuplicate(workout).Equals(false))
+            if (OperationModeModel.workoutInfoViewMode.Equals(EWorkoutInfoViewOperationMode.Add) && workoutController.CheckForDuplicateWorkout(workout).Equals(false))
             {
                 workoutController.AddWorkout(workout);
-
+            
                 this.Close();
             }
 
+            if (OperationModeModel.workoutInfoViewMode.Equals(EWorkoutInfoViewOperationMode.Edit) && workoutController.CheckForDuplicateWorkout(workout).Equals(false))
+            {
+                if (CheckForValidCheckBoxInput() == false)
+                    return;
+
+
+                if (cmbBoxWorkoutStatus.SelectedItem.Equals("Rezervisan"))
+                    workout.WorkoutStatus = EWorkoutStatus.Reserved;
+                else
+                    workout.WorkoutStatus = EWorkoutStatus.Available;
+
+                workout.Customer = (string)cmbBoxCustomer.SelectedItem;
+
+                workoutController.EditWorkout(workout);
+
+                this.Close();
+            }
         }
     }
 }

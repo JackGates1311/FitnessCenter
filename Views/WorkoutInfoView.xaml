@@ -1,4 +1,4 @@
-﻿<Window x:Class="Fitness_Center.Views.AddWorkoutInfoView"
+﻿<Window x:Class="Fitness_Center.Views.WorkoutInfoView" x:Name="workoutInfoViewWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,7 +9,7 @@
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" 
         Title="Fitnes centar - Dodaj novi trening" Height="350" Width="700" ResizeMode="NoResize">
 
-    <Grid>
+    <Grid x:Name="workoutInfoViewGrid">
 
         <Grid.ColumnDefinitions>
 
@@ -26,12 +26,14 @@
             <RowDefinition Height="60"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="60"/>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="0"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
 
         </Grid.RowDefinitions>
 
-        <Label Style="{StaticResource labelBold}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="Dodaj novi trening"/>
+        <Label x:Name="lblTitle"  Style="{StaticResource labelBold}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="Dodaj novi trening"/>
 
         <Label Grid.Row="1" Grid.Column="1" Content="Datum: "/>
 
@@ -48,9 +50,17 @@
 
         <Label Grid.Row="3" Grid.Column="2" Content="Instruktor: "/>
 
-        <ComboBox x:Name="cmbBoxInstructor" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" Width="225" />
-        
-        <Button x:Name="btnConfirm" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Click="btnConfirm_Click" Content="Dodaj novi trening" Width="525" />
+        <ComboBox x:Name="cmbBoxInstructor" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" Width="225"/>
+
+        <Label x:Name="lblWorkoutStatus" Grid.Row="5" Grid.Column="1" Content="Status: " Visibility="Collapsed"/>
+
+        <ComboBox x:Name="cmbBoxWorkoutStatus" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center" Width="225" Visibility="Collapsed" />
+
+        <Label x:Name="lblCustomer"  Grid.Row="5" Grid.Column="2" Content="Polaznik: " Visibility="Collapsed"/>
+
+        <ComboBox x:Name="cmbBoxCustomer" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Center" Width="225" Visibility="Collapsed" />
+
+        <Button x:Name="btnConfirm" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Click="btnConfirm_Click" Content="Dodaj novi trening" Width="525" />
         
     </Grid>
 

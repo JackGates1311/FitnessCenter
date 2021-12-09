@@ -22,12 +22,11 @@ namespace Fitness_Center.Views
 
         public RegisterNewUserView()
         {
-            UserViewModel.userInfoViewMode = EUserInfoViewMode.Add;
+            OperationModeModel.userInfoViewMode = EUserInfoViewOperationMode.Add;
 
             InitializeComponent();
 
             this.Closed += new EventHandler(MainWindow_Closed);
-
         }
 
         void MainWindow_Closed(object sender, EventArgs e)

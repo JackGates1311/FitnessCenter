@@ -17,11 +17,11 @@ public class LoginController {
 
     public Boolean loginToSystem(String userName, String password) {
 
-        var query = "SELECT * FROM users WHERE username = '" + userName + "' AND password = '" + password + "';";
+        var query = "SELECT * FROM users WHERE username = '" + userName + "' AND password = '" + password + "' AND IsRemoved = 0;";
 
         SqlConnectController connection = new SqlConnectController();
 
-        connection.openConnection();
+        connection.OpenConnection();
 
         if (connection != null && connection.Connection.State == ConnectionState.Open)
         {
@@ -36,7 +36,7 @@ public class LoginController {
 
             cmd.Dispose();
 
-            connection.closeConnection();
+            connection.CloseConnection();
 
             if (dt != null && dt.Rows.Count == 1) 
             {

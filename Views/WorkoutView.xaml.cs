@@ -1,4 +1,5 @@
 ﻿using Fitness_Center.Controllers;
+using Fitness_Center.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,8 +23,6 @@ namespace Fitness_Center.Views
     {
         WorkoutController workoutController = new WorkoutController();
 
-        AddWorkoutInfoView addWorkoutInfoView = new AddWorkoutInfoView();
-
         public WorkoutView()
         {
             InitializeComponent();
@@ -33,19 +32,45 @@ namespace Fitness_Center.Views
 
         private void btnAddWorkout_Click(object sender, RoutedEventArgs e)
         {
-            addWorkoutInfoView.ShowDialog();
+            OperationModeModel.workoutInfoViewMode = EWorkoutInfoViewOperationMode.Add;
+
+            WorkoutInfoView workoutInfoView = new WorkoutInfoView();
+
+            workoutInfoView.ShowDialog();
 
             workoutController.LoadWorkouts(tableWorkouts);
         }
 
         private void btnEditWorkout_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
+            OperationModeModel.workoutInfoViewMode = EWorkoutInfoViewOperationMode.Edit;
+
+            if (workoutController.CheckEditWorkout(this).Equals(true))
+            {
+                WorkoutInfoView workoutInfoView = new WorkoutInfoView();
+
+                workoutController.LoadAndFillEditWorkoutData(workoutInfoView);
+
+                workoutInfoView.ShowDialog();
+
+                workoutController.LoadWorkouts(tableWorkouts);
+            }
+            else
+                return;
         }
 
         private void btnDeleteWorkout_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
+            if (workoutController.CheckAndConfirmRemoveWorkout(this).Equals(true))
+            {
+                workoutController.RemoveWorkout();
+
+                workoutController.LoadWorkouts(tableWorkouts);
+            }
+            else
+                return;
+
         }
+
     }
 }

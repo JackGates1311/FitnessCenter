@@ -12,7 +12,7 @@ namespace Fitness_Center.Controllers
         public SqlConnection Connection { get; set; }
         private string connectionString { get; set; }
 
-        public void openConnection()
+        public void OpenConnection()
         {
             connectionString = (@"Data Source = MAKI-PC; Initial Catalog=fitnessCenter; Integrated Security = True");
 
@@ -29,7 +29,7 @@ namespace Fitness_Center.Controllers
             }
         }
 
-        public DataTable performQuery(String query)
+        public DataTable PerformQuery(String query)
         {
             if (Connection.State == ConnectionState.Open)
             {
@@ -52,7 +52,7 @@ namespace Fitness_Center.Controllers
             }
         }
 
-        public void closeConnection()
+        public void CloseConnection()
         {
             Connection.Close();
         }

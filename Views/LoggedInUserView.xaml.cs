@@ -18,11 +18,9 @@ namespace Fitness_Center.Views
     /// </summary>
     public partial class LoggedInUserView : Window
     {
-        RegisteredUserController registeredUserController = new RegisteredUserController();
-
         public LoggedInUserView()
         {
-            UserViewModel.userInfoViewMode = EUserInfoViewMode.Edit;
+            OperationModeModel.userInfoViewMode = EUserInfoViewOperationMode.Edit;
 
             InitializeComponent();
 

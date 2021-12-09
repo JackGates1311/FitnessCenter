@@ -34,4 +34,15 @@ public class WorkoutModel {
     public string Customer { get => customer; set => customer = value; }
     public bool IsRemoved { get => isRemoved; set => isRemoved = value; }
 
+    public WorkoutModel(DateTime dateTimeStart, DateTime dateTimeEnd, int length, EWorkoutStatus workoutStatus, string instructor, string customer, bool isRemoved)
+    {
+        DateTimeStart = dateTimeStart;
+        DateTimeEnd = dateTimeEnd;
+        Length = length;
+        WorkoutStatus = workoutStatus;
+        Instructor = instructor;
+        Customer = customer;
+        IsRemoved = isRemoved;
+    }
+
 }

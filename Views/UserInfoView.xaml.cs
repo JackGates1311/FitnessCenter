@@ -31,14 +31,14 @@ namespace Fitness_Center.Views
         {
             InitializeComponent();
 
-            if (UserViewModel.userInfoViewMode.Equals(EUserInfoViewMode.Add))
+            if (OperationModeModel.userInfoViewMode.Equals(EUserInfoViewOperationMode.Add))
             {
                 LoadUserInfoViewAddMode();
 
                 SetRegisteredUserType();
             }
 
-            if (UserViewModel.userInfoViewMode.Equals(EUserInfoViewMode.Edit))
+            if (OperationModeModel.userInfoViewMode.Equals(EUserInfoViewOperationMode.Edit))
             {
                 LoadUserInfoViewEditMode();
 
@@ -100,10 +100,10 @@ namespace Fitness_Center.Views
         {
             SetRegisteredUserGender();
 
-            if (UserViewModel.userInfoViewMode.Equals(EUserInfoViewMode.Add))
+            if (OperationModeModel.userInfoViewMode.Equals(EUserInfoViewOperationMode.Add))
                 unregistredUserController.registerNewUser(registeredUserModel, addressModel, this);
 
-            if (UserViewModel.userInfoViewMode.Equals(EUserInfoViewMode.Edit))
+            if (OperationModeModel.userInfoViewMode.Equals(EUserInfoViewOperationMode.Edit))
                 registeredUserController.changeRegisteredUserInfo(registeredUserModel, addressModel);
         }
 

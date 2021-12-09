@@ -21,9 +21,9 @@ public class FitnessCenterController {
 
         SqlConnectController connection = new SqlConnectController();
 
-        connection.openConnection();
+        connection.OpenConnection();
 
-        DataTable dt = connection.performQuery(query);
+        DataTable dt = connection.PerformQuery(query);
 
         fitnessCenter.Id = dt.Rows[0]["FitnessCenterID"].ToString();
         fitnessCenter.CenterName = dt.Rows[0]["Center"].ToString();
@@ -38,7 +38,7 @@ public class FitnessCenterController {
 
         fitnessCenter.Address = fullAddress;
 
-        connection.closeConnection();
+        connection.CloseConnection();
     }
 
     public void ChangeFitnessCenterInfo(FitnessCenterModel fitnessCenter, AddressModel address) 
@@ -49,12 +49,13 @@ public class FitnessCenterController {
 
         SqlConnectController connection = new SqlConnectController();
 
-        connection.openConnection();
+        connection.OpenConnection();
 
-        DataTable dt = connection.performQuery(query);
+        DataTable dt = connection.PerformQuery(query);
 
         MessageBox.Show("Podaci o fitnes centru su uspešno izmenjeni!", "Obaveštenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Information);
 
+        connection.CloseConnection();
     }
 
 }

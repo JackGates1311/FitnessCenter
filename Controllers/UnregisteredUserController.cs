@@ -26,11 +26,11 @@ public class UnregisteredUserController
 
         SqlConnectController connection = new SqlConnectController();
 
-        connection.openConnection();
+        connection.OpenConnection();
 
         try
         {
-            DataTable dt = connection.performQuery(query);
+            DataTable dt = connection.PerformQuery(query);
 
             MessageBox.Show("Korisnik je uspešno registrovan!", "Obaveštenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -41,6 +41,8 @@ public class UnregisteredUserController
             MessageBox.Show("Korisnik je veæ registrovan sa istim korisnièkim imenom ili JMBG-om na sistem", "Upozorenje - Fitnes centar", 
                 MessageBoxButton.OK, MessageBoxImage.Warning);
         }
+
+        connection.CloseConnection();
 
 
     }

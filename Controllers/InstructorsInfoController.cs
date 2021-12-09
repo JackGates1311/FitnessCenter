@@ -18,13 +18,13 @@ namespace Fitness_Center.Controllers
 
             SqlConnectController connection = new SqlConnectController();
 
-            connection.openConnection();
+            connection.OpenConnection();
 
-            DataTable dt = connection.performQuery(query);
+            DataTable dt = connection.PerformQuery(query);
 
             table.ItemsSource = dt.DefaultView;
 
-            connection.closeConnection();
+            connection.CloseConnection();
         }
 
     }

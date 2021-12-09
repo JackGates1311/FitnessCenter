@@ -28,9 +28,9 @@ public class RegisteredUserController {
 
         SqlConnectController connection = new SqlConnectController();
 
-        connection.openConnection();
+        connection.OpenConnection();
 
-        DataTable dt = connection.performQuery(query);
+        DataTable dt = connection.PerformQuery(query);
 
         user.Name = dt.Rows[0]["Name"].ToString();
         user.Surname = dt.Rows[0]["Surname"].ToString();
@@ -58,7 +58,7 @@ public class RegisteredUserController {
 
         user.IsRemoved = Boolean.Parse(dt.Rows[0]["IsRemoved"].ToString());
 
-        connection.closeConnection();
+        connection.CloseConnection();
     }
 
     public void changeRegisteredUserInfo(RegisteredUserModel user, AddressModel address) 
@@ -73,9 +73,11 @@ public class RegisteredUserController {
 
         SqlConnectController connection = new SqlConnectController();
 
-        connection.openConnection();
+        connection.OpenConnection();
 
-        DataTable dt = connection.performQuery(query);
+        DataTable dt = connection.PerformQuery(query);
+
+        connection.CloseConnection();
 
         MessageBox.Show("Podaci o ulogovanom korisniku su uspešno izmenjeni!", "Obaveštenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Information);
 

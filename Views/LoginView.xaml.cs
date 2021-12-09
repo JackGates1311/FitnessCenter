@@ -45,7 +45,7 @@ namespace Fitness_Center.Views
                 this.Hide();
             }
             else
-                MessageBox.Show("Korisničko ime ili lozinka nisu ispravni, prijava na sistem neuspešna!", "Upozorenje - Fitnes centar", 
+                MessageBox.Show("Korisničko ime ili lozinka nisu ispravni, prijava na sistem neuspešna", "Upozorenje - Fitnes centar", 
                     MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
