@@ -39,7 +39,7 @@ namespace Fitness_Center.Views
 
             if (OperationModeModel.workoutInfoViewMode.Equals(EWorkoutInfoViewOperationMode.Add))
             {
-                timePickerWorkout.Text = DateTime.Now.AddMinutes(15).ToString("HH:mm");
+                timePickerWorkout.Text = DateTime.Now.ToString("HH:mm");
 
             }
             if (OperationModeModel.workoutInfoViewMode.Equals(EWorkoutInfoViewOperationMode.Edit))
@@ -60,19 +60,19 @@ namespace Fitness_Center.Views
 
         private Boolean CheckForValidDateTimeInput()
         {
-            DateTime todayDateTime = DateTime.Now.AddMinutes(15);
+            DateTime todayDateTime = DateTime.Now;
             DateTime selectedStartDate = datePickerWorkout.SelectedDate.Value;
             DateTime selectedStartTime = DateTime.Parse(timePickerWorkout.Value.ToString());
 
             selectedDateTimeStart = DateTime.Parse(selectedStartDate.ToString("yyyy-MM-dd") + selectedStartTime.ToString(" HH:mm:ss"));
             selectedDateTimeEnd = selectedDateTimeStart.AddMinutes(int.Parse(cmbBoxLength.SelectedItem.ToString()));
 
-            if (todayDateTime.AddMinutes(-15).ToString("yyyy-MM-dd") == selectedStartDate.ToString("yyyy-MM-dd") && todayDateTime > selectedStartTime)
+            if (todayDateTime.ToString("yyyy-MM-dd") == selectedStartDate.ToString("yyyy-MM-dd") && todayDateTime > selectedStartTime)
             {
-                MessageBox.Show("Izabrali ste datum i vreme koji su već prošli ili su jako blizu da prođu u odnosu na trenutno.", "Upozorenje - Fitnes centar",
+                MessageBox.Show("Izabrali ste datum i vreme koji su već prošli u odnosu na trenutno.", "Upozorenje - Fitnes centar",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
 
-                timePickerWorkout.Text = DateTime.Now.AddMinutes(15).ToString("HH:mm");
+                timePickerWorkout.Text = DateTime.Now.ToString("HH:mm");
 
                 return false;
             }

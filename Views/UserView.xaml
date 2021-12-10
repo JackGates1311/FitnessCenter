@@ -43,29 +43,28 @@
             <ComboBoxItem Content="Polaznici"/>
 
         </ComboBox>
-        
+
         <DataGrid x:Name="tableUsers" IsReadOnly="True" Grid.Row="2" Grid.Column="2" Grid.RowSpan="5">
 
             <DataGrid.Columns>
 
-                <DataGridTextColumn Width ="20*" Header="Ime" Binding="{Binding Name}" />
-                <DataGridTextColumn Width ="30*" Header="Prezime" Binding="{Binding Surname}" />
-                <DataGridTextColumn Width ="50*" Header="JMBG" Binding="{Binding JMBG}" />
-                <DataGridTextColumn Width ="50*" Header="Email" Binding="{Binding Email}" />
-                <DataGridTextColumn Width ="50*" Header="Korisničko ime" Binding="{Binding UserName}" />
-                <DataGridTextColumn Width ="50*" Header="Lozinka" Binding="{Binding Password}" />
-                <DataGridTextColumn Width ="50*" Header="Pol" Binding="{Binding Gender}" />
-                <DataGridTextColumn Width ="50*" Header="Tip korisnika" Binding="{Binding UserType}" />
-                <DataGridTextColumn Width ="25*" Header="Država" Binding="{Binding Country}" />
+                <DataGridTextColumn Width ="40*" Header="Korisničko ime" Binding="{Binding UserName}" />
+                <DataGridTextColumn Width ="30*" Header="Ime" Binding="{Binding Name}" />
+                <DataGridTextColumn Width ="35*" Header="Prezime" Binding="{Binding Surname}" />
+                <DataGridTextColumn Width ="60*" Header="Email" Binding="{Binding Email}" />
+                <DataGridTextColumn Width ="28" Header="Pol" Binding="{Binding Gender}" />
+                <DataGridTextColumn Width ="95" Header="JMBG" Binding="{Binding JMBG}" />
+                <DataGridTextColumn Width ="80" Header="Tip korisnika" Binding="{Binding UserType}" />
+                <DataGridTextColumn Width ="40*" Header="Država" Binding="{Binding Country}" />
                 <DataGridTextColumn Width ="25*" Header="Grad" Binding="{Binding City}" />
                 <DataGridTextColumn Width ="50*" Header="Ulica" Binding="{Binding Street}" />
-                <DataGridTextColumn Width ="10*" Header="Broj" Binding="{Binding AddressNumber}" />
-                <DataGridCheckBoxColumn Width ="15*" Header="Obrisan" Binding="{Binding IsRemoved}" />
-                
+                <DataGridTextColumn Width ="15*" Header="Broj" Binding="{Binding AddressNumber}" />
+                <DataGridCheckBoxColumn Width ="18*" Header="Obrisan" Binding="{Binding IsRemoved}" />
+
             </DataGrid.Columns>
 
         </DataGrid>
-        
+
     </Grid>
 
 </UserControl>

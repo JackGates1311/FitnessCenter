@@ -74,10 +74,29 @@ public class RegisteredUserController {
 
         DataTable dt = connection.PerformQuery(query);
 
+        ParseGenderAndUserType(dt);
+
         table.ItemsSource = dt.DefaultView;
 
         connection.CloseConnection();
 
+    }
+
+    private void ParseGenderAndUserType(DataTable dt)
+    {
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            if (dt.Rows[i]["Gender"].Equals("Male"))
+                dt.Rows[i]["Gender"] = "M";
+            else
+                dt.Rows[i]["Gender"] = "Ž";
+
+            if (dt.Rows[i]["UserType"].Equals("Instructor"))
+                dt.Rows[i]["UserType"] = "Instruktor";
+            if (dt.Rows[i]["UserType"].Equals("Customer"))
+                dt.Rows[i]["UserType"] = "Polaznik";
+
+        }
     }
 
     public void ChangeRegisteredUserInfo(RegisteredUserModel user, AddressModel address) 

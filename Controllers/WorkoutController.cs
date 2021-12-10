@@ -87,7 +87,8 @@ namespace Fitness_Center.Controllers
             var query = "SELECT * from Workouts WHERE (Workouts.InstructorUserName LIKE '" + workout.Instructor + "') " +
                 "AND WorkoutId != '" + workout.Id + "'AND IsRemoved = '0' AND (DateTimeStart between '" + workout.DateTimeStart.ToString("yyyy-MM-dd HH:mm") + "' " +
                 "AND '" + workout.DateTimeEnd.ToString("yyyy-MM-dd HH:mm") + "' OR DateTimeEnd between '" + workout.DateTimeStart.ToString("yyyy-MM-dd HH:mm") +
-                "' AND '" + workout.DateTimeEnd.ToString("yyyy-MM-dd HH:mm") + "'); ";
+                "' AND '" + workout.DateTimeEnd.ToString("yyyy-MM-dd HH:mm") + "' OR (Workouts.DateTimeStart <= '" + workout.DateTimeStart.ToString("yyyy-MM-dd HH:mm") + "' " +
+                "AND Workouts.DateTimeEnd >= '" + workout.DateTimeEnd.ToString("yyyy-MM-dd HH:mm") + "')); ";
 
             connection.OpenConnection();
 
@@ -199,7 +200,7 @@ namespace Fitness_Center.Controllers
 
             DataTable dt = connection.PerformQuery(query);
 
-            if (DateTime.Now > DateTime.Parse(dt.Rows[0]["DateTimeEnd"].ToString()))
+            if (DateTime.Now > DateTime.Parse(dt.Rows[0]["DateTimeStart"].ToString()))
             {
                 MessageBox.Show("Ovaj trening nije moguće izmeniti", "Upozorenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Warning);
                 workoutInfoView.Close();
