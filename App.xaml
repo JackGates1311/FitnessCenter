@@ -37,6 +37,12 @@
 
             </Style>
 
+            <Style TargetType="{x:Type CheckBox}">
+
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+            
+            </Style>
+
             <Style TargetType="{x:Type PasswordBox}">
 
                 <Setter Property="Height" Value="28"/>

@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fitness_Center.Views"
-        mc:Ignorable="d" WindowStartupLocation="CenterScreen" MinHeight="750" MinWidth="1500"
-        Title="Fitnes centar - Prijavljeni ste kao korisnik" Height="750" Width="1500">
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" MinHeight="800" MinWidth="1500"
+        Title="Fitnes centar - Prijavljeni ste kao korisnik" Height="800" Width="1500">
     
     <Grid>
 
@@ -51,7 +51,7 @@
             </TabItem>
 
 
-            <TabItem>
+            <TabItem x:Name="userInfoViewTabItem" Visibility="Collapsed">
 
                 <TabItem.Header>
 
@@ -71,7 +71,7 @@
                 
             </TabItem>
 
-            <TabItem>
+            <TabItem x:Name="instructorsInfoViewTabItem" Visibility="Collapsed">
 
                 <TabItem.Header>
 

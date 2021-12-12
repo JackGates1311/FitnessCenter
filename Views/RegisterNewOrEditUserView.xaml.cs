@@ -15,18 +15,17 @@ using System.Windows.Shapes;
 namespace Fitness_Center.Views
 {
     /// <summary>
-    /// Interaction logic for RegisterNewUserView.xaml
+    /// Interaction logic for RegisterNewOrEditUserView.xaml
     /// </summary>
-    public partial class RegisterNewUserView : Window
+    public partial class RegisterNewOrEditUserView : Window
     {
 
-        public RegisterNewUserView()
+        public RegisterNewOrEditUserView()
         {
-            OperationModeModel.userInfoViewMode = EUserInfoViewOperationMode.Add;
-
             InitializeComponent();
 
-            this.Closed += new EventHandler(MainWindow_Closed);
+            if(LoggedInUserModel.userType.Equals(null))
+                this.Closed += new EventHandler(MainWindow_Closed);
         }
 
         void MainWindow_Closed(object sender, EventArgs e)

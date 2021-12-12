@@ -1,4 +1,5 @@
-﻿using Fitness_Center.Models;
+﻿using Fitness_Center.Controllers;
+using Fitness_Center.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -42,7 +43,17 @@ namespace Fitness_Center.Views
             {
                 LoadUserInfoViewEditMode();
 
-                registeredUserController.GetRegisteredUserInfo(registeredUserModel, addressModel);
+                registeredUserController.GetRegisteredUserInfo(registeredUserModel, addressModel, "Users.UserName LIKE '" + LoggedInUserModel.userName + "'");
+
+                DetectRegisteredUserGender();
+            }
+
+            if (OperationModeModel.userInfoViewMode.Equals(EUserInfoViewOperationMode.EditTable))
+            {
+                LoadUserInfoViewEditMode();
+
+                registeredUserController.GetRegisteredUserInfo(registeredUserModel, addressModel, 
+                    "Users.AddressId LIKE '" + RemoveOrEditSelectedRowController.selectedRowId + "'");
 
                 DetectRegisteredUserGender();
             }
@@ -60,12 +71,12 @@ namespace Fitness_Center.Views
         private void LoadUserInfoViewAddMode()
         {
             this.lblTitle.Content = "Registracija novog korisnika:";
-            this.btnConfirm.Content = "Registruj se";
+            this.btnConfirm.Content = "Kliknite ovde da bi ste izvršili registraciju";
         }
 
         private void LoadUserInfoViewEditMode()
         {
-            this.lblTitle.Content = "Moj profil:";
+            this.lblTitle.Content = "Podaci o korisniku:";
             this.btnConfirm.Content = "Sačuvaj izmene";
 
             this.txtUserName.IsReadOnly = true;
@@ -104,7 +115,19 @@ namespace Fitness_Center.Views
                 unregistredUserController.RegisterNewUser(registeredUserModel, addressModel, this);
 
             if (OperationModeModel.userInfoViewMode.Equals(EUserInfoViewOperationMode.Edit))
-                registeredUserController.ChangeRegisteredUserInfo(registeredUserModel, addressModel);
+                registeredUserController.ChangeRegisteredUserInfo(registeredUserModel, addressModel, "UserName LIKE '" + LoggedInUserModel.userName + "'",
+                    "UserName LIKE '" + LoggedInUserModel.userName + "' WHERE u.UserName LIKE '" + LoggedInUserModel.userName + "'");
+
+            if (OperationModeModel.userInfoViewMode.Equals(EUserInfoViewOperationMode.EditTable))
+            {
+                registeredUserController.ChangeRegisteredUserInfo(registeredUserModel, addressModel,
+                    "AddressId LIKE '" + RemoveOrEditSelectedRowController.selectedRowId + "'", "u.AddressId LIKE '" +
+                    RemoveOrEditSelectedRowController.selectedRowId + "' WHERE u.AddressId LIKE '" + RemoveOrEditSelectedRowController.selectedRowId + "'");
+
+                CloseParentWindow();
+
+            }
+
         }
 
     }

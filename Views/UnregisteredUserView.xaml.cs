@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fitness_Center.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -24,12 +25,13 @@ namespace Fitness_Center.Views
             this.Closed += new EventHandler(MainWindow_Closed);
 
         }
-
         void MainWindow_Closed(object sender, EventArgs e)
         {
+
             LoginView loginView = new LoginView();
 
             loginView.Show();
+
         }
 
     }

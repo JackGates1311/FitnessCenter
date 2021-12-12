@@ -1,5 +1,6 @@
 ﻿public enum EUserInfoViewOperationMode
 {
     Add,
-    Edit
+    Edit,
+    EditTable
 }

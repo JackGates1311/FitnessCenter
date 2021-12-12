@@ -25,9 +25,11 @@ namespace Fitness_Center.Views
 
         private void btnRegister_Click(object sender, RoutedEventArgs e) 
         {
-            RegisterNewUserView registerNewUserView = new RegisterNewUserView();
+            OperationModeModel.userInfoViewMode = EUserInfoViewOperationMode.Add;
 
-            registerNewUserView.Show();
+            RegisterNewOrEditUserView registerNewOrEditUserView = new RegisterNewOrEditUserView();
+
+            registerNewOrEditUserView.Show();
 
             this.Hide();
         }

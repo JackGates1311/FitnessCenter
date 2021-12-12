@@ -31,10 +31,12 @@ namespace Fitness_Center.Views
             if (LoggedInUserModel.userType.Equals(EUserType.Instructor))
             {
                 lblUserName.Content += "' (" + "Insktruktor" + ")";
+                ViewInstructorTabItems();
             }
             else if (LoggedInUserModel.userType.Equals(EUserType.Customer))
             {
                 lblUserName.Content += "' (" + "Polaznik" + ")";
+                ViewCustomerTabItems();
             }
             else
             {
@@ -47,6 +49,18 @@ namespace Fitness_Center.Views
         {
             workoutViewTabItem.Visibility = Visibility.Visible;
             userViewTabItem.Visibility = Visibility.Visible;
+        }
+
+        private void ViewInstructorTabItems()
+        {
+            instructorsInfoViewTabItem.Visibility = Visibility.Visible;
+            userInfoViewTabItem.Visibility = Visibility.Visible;
+        }
+
+        private void ViewCustomerTabItems()
+        {
+            instructorsInfoViewTabItem.Visibility = Visibility.Visible;
+            userInfoViewTabItem.Visibility = Visibility.Visible;
         }
 
         private void MainWindow_Closed(object sender, EventArgs e)

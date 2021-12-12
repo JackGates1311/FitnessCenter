@@ -11,16 +11,13 @@ namespace Fitness_Center.Controllers
 {
     class WorkoutController
     {
-
         SqlConnectController connection = new SqlConnectController();
 
-        String selectedRowWorkoutId;
-
-        public string SelectedRowWorkoutId { get => selectedRowWorkoutId; set => selectedRowWorkoutId = value; }
+        RemoveOrEditSelectedRowController dataGridController = new RemoveOrEditSelectedRowController();
 
         public void LoadWorkouts(DataGrid table)
         {
-            var query = "SELECT * from Workouts ORDER BY DateTimeStart;";
+            var query = "SELECT * from Workouts WHERE IsRemoved='0' ORDER BY DateTimeStart;";
 
             SqlConnectController connection = new SqlConnectController();
 
@@ -120,56 +117,21 @@ namespace Fitness_Center.Controllers
 
             DataTable dt = connection.PerformQuery(query);
 
-            MessageBox.Show("Termin za trening je uspešno kreiran!", "Obaveštenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Termin za trening je uspešno kreiran", "Obaveštenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Information);
 
             connection.CloseConnection();
             
         }
 
-        public Boolean CheckIfRowIsSelected(WorkoutView workoutView)
-        {
-            if (workoutView.tableWorkouts.SelectedIndex == -1)
-            {
-                MessageBox.Show("Niste izabrali nijednu vrstu u tabeli", "Upozorenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Warning);
-
-                return false;
-            }
-            else
-                return true;
-        }
-
-        public Boolean CheckIfSelectedRowIsRemoved(WorkoutView workoutView)
-        {
-            foreach (DataRowView row in workoutView.tableWorkouts.SelectedItems)
-            {
-                DataRow selectedRow = row.Row;
-
-                if (selectedRow[7].ToString() == "False")
-                {
-                    SelectedRowWorkoutId = selectedRow[0].ToString();
-
-                    return false;
-                }
-                else
-                {
-                    MessageBox.Show("Izabrali ste trening koji je obrisan", "Upozorenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return true;
-                }
-
-            }
-
-            return true;
-        }
-
         public Boolean CheckAndConfirmRemoveWorkout(WorkoutView workoutView)
         {
-            if (CheckIfRowIsSelected(workoutView).Equals(true))
+            if (dataGridController.CheckIfRowIsSelected(workoutView.tableWorkouts).Equals(true))
             {
                 if (MessageBox.Show("Da li ste sigurni da želite obrisati izabrani trening?", "Upozorenje - Fitnes centar",
                     MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
 
-                    if (CheckIfSelectedRowIsRemoved(workoutView).Equals(false))
+                    if (dataGridController.CheckIfSelectedRowIsRemoved(workoutView.tableWorkouts, "Workouts").Equals(false))
                         return true;
                     else
                         return false;
@@ -182,19 +144,10 @@ namespace Fitness_Center.Controllers
             return false;
         }
 
-        public Boolean CheckEditWorkout(WorkoutView workoutView)
-        {
-
-            if (CheckIfRowIsSelected(workoutView).Equals(true) && CheckIfSelectedRowIsRemoved(workoutView).Equals(false))
-                return true;
-            else
-                return false;
-        
-        }
-
         public void LoadAndFillEditWorkoutData(WorkoutInfoView workoutInfoView)
         {
-            var query = "SELECT * from Workouts WHERE WorkoutId=" + SelectedRowWorkoutId + "";
+
+            var query = "SELECT * from Workouts WHERE WorkoutId=" + RemoveOrEditSelectedRowController.selectedRowId + "";
 
             connection.OpenConnection();
 
@@ -207,7 +160,7 @@ namespace Fitness_Center.Controllers
             }
             else 
             {
-                workoutInfoView.SelectedRowWorkoutId = SelectedRowWorkoutId;
+                workoutInfoView.SelectedRowWorkoutId = RemoveOrEditSelectedRowController.selectedRowId;
 
                 workoutInfoView.Title = "Fitnes centar - Izmeni trening";
                 workoutInfoView.btnConfirm.Content = "Sačuvaj izmene";
@@ -253,22 +206,7 @@ namespace Fitness_Center.Controllers
 
             DataTable dt = connection.PerformQuery(query);
 
-            MessageBox.Show("Trening je uspešno izmenjen " + "\n\n" + SelectedRowWorkoutId, "Obaveštenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            connection.CloseConnection();
-        }
-
-        internal void RemoveWorkout()
-        {
-            var query = "UPDATE Workouts SET IsRemoved = 1 WHERE WorkoutId = " + SelectedRowWorkoutId + ";";
-
-            SqlConnectController connection = new SqlConnectController();
-
-            connection.OpenConnection();
-
-            DataTable dt = connection.PerformQuery(query);
-
-            MessageBox.Show("Trening je uspešno obrisan", "Obaveštenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Trening je uspešno izmenjen", "Obaveštenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Information);
 
             connection.CloseConnection();
         }

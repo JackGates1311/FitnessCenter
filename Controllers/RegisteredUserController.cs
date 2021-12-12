@@ -1,6 +1,7 @@
 
 using Fitness_Center.Controllers;
 using Fitness_Center.Models;
+using Fitness_Center.Views;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,14 +19,13 @@ public class RegisteredUserController {
 
     }
 
-    public void GetRegisteredUserInfo(RegisteredUserModel user, AddressModel address) 
+    public void GetRegisteredUserInfo(RegisteredUserModel user, AddressModel address, String queryProperty) 
     {
-
-        var query = "select Users.Name, Users.Surname, Users.JMBG, Users.Email, Users.AddressId, Users.UserName, Users.Password, " +
+        var query = "SELECT Users.Name, Users.Surname, Users.JMBG, Users.Email, Users.AddressId, Users.UserName, Users.Password, " +
             "Users.Gender, Users.UserType, Users.IsRemoved, " +
-            "Addresses.Country, Addresses.City, Addresses.Street, Addresses.AddressNumber from addresses " +
-            "inner join Users ON Addresses.AddressId = Users.AddressId " +
-            "where Users.UserName LIKE '" + LoggedInUserModel.userName + "'";
+            "Addresses.Country, Addresses.City, Addresses.Street, Addresses.AddressNumber from Addresses " +
+            "INNER JOIN Users ON Addresses.AddressId = Users.AddressId " +
+            "WHERE " + queryProperty + ";";
 
         SqlConnectController connection = new SqlConnectController();
 
@@ -62,11 +62,12 @@ public class RegisteredUserController {
         connection.CloseConnection();
     }
 
-    public void LoadUserData(DataGrid table)
+    public void LoadUserData(DataGrid table, String queryProperty, String queryHideDeletedUsers, String Name, String Surname, String Email, String Street)
     {
-        var query = "SELECT Users.Name, Users.Surname, Users.JMBG, Users.Email, Users.UserName, Users.Password, Users.Gender, Users.UserType, " +
+        var query = "SELECT Users.AddressId, Users.Name, Users.Surname, Users.JMBG, Users.Email, Users.UserName, Users.Password, Users.Gender, Users.UserType, " +
             "Addresses.Country, Addresses.City, Addresses.Street, Addresses.AddressNumber, Users.IsRemoved " +
-            "FROM Users INNER JOIN Addresses ON Addresses.AddressId = Users.AddressId ";
+            "FROM Users INNER JOIN Addresses ON Addresses.AddressId = Users.AddressId " + queryProperty + " " + queryHideDeletedUsers +
+            " AND Name LIKE '%" + Name + "%' and Surname LIKE '%" + Surname + "%' and Street LIKE '%" + Street + "%' and Email LIKE '%" + Email + "%'" + " ;";
 
         SqlConnectController connection = new SqlConnectController();
 
@@ -99,15 +100,14 @@ public class RegisteredUserController {
         }
     }
 
-    public void ChangeRegisteredUserInfo(RegisteredUserModel user, AddressModel address) 
+    public void ChangeRegisteredUserInfo(RegisteredUserModel user, AddressModel address, String queryPropertyUsers, String queryPropertyAddresses) 
     {
         var query = "UPDATE Users SET Name = '" + user.Name + "', " + "Surname = '" + user.Surname + "', " +
             "Email = '" + user.Email + "', Password = '" + user.Password + "', Gender = '" + user.Gender.ToString() + "' " +
-            "WHERE UserName LIKE '" + LoggedInUserModel.userName +  "' " +
+            "WHERE " + queryPropertyUsers + 
             "UPDATE Addresses SET Country = '" + address.Country +"', City = '" + address.City + "', " +
             "Street = '" + address.Street + "', AddressNumber = '" + address.Number + "' " +
-            "FROM Users AS u INNER JOIN Addresses AS a ON u.AddressId = a.AddressId AND UserName LIKE '" + LoggedInUserModel.userName +
-            "' WHERE u.UserName LIKE '" + LoggedInUserModel.userName + "' ;";
+            "FROM Users AS u INNER JOIN Addresses AS a ON u.AddressId = a.AddressId AND " + queryPropertyAddresses + ";";
 
         SqlConnectController connection = new SqlConnectController();
 
@@ -117,8 +117,13 @@ public class RegisteredUserController {
 
         connection.CloseConnection();
 
-        MessageBox.Show("Podaci o ulogovanom korisniku su uspešno izmenjeni!", "Obaveštenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Information);
+        MessageBox.Show("Podaci o ulogovanom korisniku su uspešno izmenjeni", "Obaveštenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Information);
 
+    }
+
+    public void RemoveUser(String selectedRowId)
+    { 
+    
     }
 
 }

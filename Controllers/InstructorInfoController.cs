@@ -13,8 +13,8 @@ namespace Fitness_Center.Controllers
         public void LoadInstructorData(DataGrid table, String Name, String Surname, String Email, String Street)
         {
             var query = "SELECT Users.Name, Users.Surname, Users.Email, Addresses.Country, Addresses.City, Addresses.Street, " +
-                "Addresses.AddressNumber FROM Addresses inner join Users ON Addresses.AddressId = Users.AddressId where Users.UserType = 'Instructor' " +
-                "and Name LIKE '%" + Name + "%' and Surname LIKE '%" + Surname + "%' and Street LIKE '%" + Street + "%' and Email LIKE '%" + Email + "%'";
+                "Addresses.AddressNumber FROM Addresses INNER JOIN Users ON Addresses.AddressId = Users.AddressId WHERE Users.UserType = 'Instructor' " +
+                "AND Name LIKE '%" + Name + "%' and Surname LIKE '%" + Surname + "%' and Street LIKE '%" + Street + "%' and Email LIKE '%" + Email + "%'";
 
             SqlConnectController connection = new SqlConnectController();
 

@@ -27,7 +27,7 @@ Aplikacija podržava sledeće funkcionalnosti:
 
 4. {+ Svi registrovani korisnici imaju pregled svojih ličnih podataka i mogućnost izmene istih. +}
 
-5. Administrator-ima mogućnost pregleda svih entiteta. Sve podatke može da doda, izmeni i obriše. Sva brisanja su logička (podatak postaje neaktivan i više se ne prikazuje, ne može se obrisati i izmeniti). Može da briše Treninge bez obzira da li su REZERVISANI ili SLOBODNI. Kreira inicijalno SLOBODNE treninge instruktorima. Samo administratori mogu da registruju nove instruktore.
+5. {+ Administrator-ima mogućnost pregleda svih entiteta. Sve podatke može da doda, izmeni i obriše. Sva brisanja su logička (podatak postaje neaktivan i više se ne prikazuje, ne može se obrisati i izmeniti). Može da briše Treninge bez obzira da li su REZERVISANI ili SLOBODNI. Kreira inicijalno SLOBODNE treninge instruktorima. Samo administratori mogu da registruju nove instruktore. +}
 
 6. Instruktor ima mogućnost pregleda svojih treninga (slobodnih i zauzetih) za odabrani datum i pregled polaznika koji su kod njega rezervisali trening. Omogućiti da instruktori kreiraju i brišu
 svoje slobodne treninge. Ograničenje prilikom brisanja termina: instruktor ne može da obriše trening ako je REZERVISAN tj. ako je u tom terminu izvršena rezervacija.

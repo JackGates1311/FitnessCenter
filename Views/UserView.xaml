@@ -5,13 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Fitness_Center.Views"
              mc:Ignorable="d" Background="White"
-             d:DesignHeight="450" d:DesignWidth="800">
-    
+             d:DesignHeight="750" d:DesignWidth="800">
+
     <Grid Margin="0,0,23,21">
 
         <Grid.ColumnDefinitions>
 
-            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="200*"/>
 
         </Grid.ColumnDefinitions>
@@ -19,6 +20,15 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
@@ -27,15 +37,26 @@
 
         </Grid.RowDefinitions>
 
-        <Label Style="{StaticResource labelBold}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Content="Korisnici"/>
+        <Label Style="{StaticResource labelBold}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"  Content="Korisnici"/>
 
-        <Button x:Name="btnAddInstructor" Grid.Row="2" Grid.Column="0" Content="Dodaj instruktora" Click="btnAddInstructor_Click" Width="250" Margin="0" />
+        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Ime: "/>
 
-        <Button x:Name="btnEditUser" Grid.Row="3" Grid.Column="0" Content="Izmeni izabranog korisnika" Click="btnEditUser_Click" Width="250"  Margin="10" />
+        <TextBox x:Name="txtName" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"  />
 
-        <Button x:Name="btnDeleteUser" Grid.Row="4" Grid.Column="0" Content="Obriši izabranog korisnika" Click="btnDeleteUser_Click" Width="250"  Margin="10" />
+        <Label Grid.Row="3" Grid.Column="0" Content="Prezime: " Grid.ColumnSpan="2" />
 
-        <ComboBox x:Name="cmbBoxUserType" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" Width="250">
+        <TextBox x:Name="txtSurname" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" />
+
+        <Label Grid.Row="5" Grid.Column="0" Content="Adresa: " Grid.ColumnSpan="2" />
+
+        <TextBox x:Name="txtStreet" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" />
+
+        <Label Grid.Row="7" Grid.Column="0" Content="E-Mail adresa: " Grid.ColumnSpan="2" />
+
+        <TextBox x:Name="txtEmail" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" />
+
+        <ComboBox x:Name="cmbBoxUserType" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" 
+                  Width="250" SelectionChanged="cmbBoxUserType_SelectionChanged" SelectedIndex="-1">
 
             <ComboBoxItem Content="Svi korisnici"/>
             <ComboBoxItem Content="Administratori"/>
@@ -44,7 +65,19 @@
 
         </ComboBox>
 
-        <DataGrid x:Name="tableUsers" IsReadOnly="True" Grid.Row="2" Grid.Column="2" Grid.RowSpan="5">
+        <Button x:Name="btnSearch" Grid.Row="10" Grid.Column="0" Content="Pretraži" Click="btnSearch_Click" Width="Auto"  Margin="25,10,10,10" />
+
+        <Button x:Name="btnClearSearch" Grid.Row="10" Grid.Column="1" Content="Poništi pretragu" Click="btnClearSearch_Click" Width="Auto"  Margin="10,10,25,10" />
+
+        <CheckBox x:Name="chkBoxHideDeletedUsers" Content="Sakrij obrisane korisnike" Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" IsChecked="True" Checked="chkBoxHideDeletedUsers_Checked" Unchecked="chkBoxHideDeletedUsers_Unchecked" Margin="0,15" />
+        
+        <Button x:Name="btnAddInstructor" Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2" Content="Dodaj instruktora" Click="btnAddInstructor_Click" Width="250" Margin="0" />
+
+        <Button x:Name="btnEditUser" Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="2" Content="Izmeni izabranog korisnika" Click="btnEditUser_Click" Width="250"  Margin="10" />
+
+        <Button x:Name="btnDeleteUser" Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="2" Content="Obriši izabranog korisnika" Click="btnDeleteUser_Click" Width="250"  Margin="10" />
+
+        <DataGrid x:Name="tableUsers" IsReadOnly="True" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="14">
 
             <DataGrid.Columns>
 

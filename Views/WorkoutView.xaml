@@ -46,7 +46,6 @@
                 <DataGridTextColumn Width ="25*" Header="Status" Binding="{Binding WorkoutStatus}" />
                 <DataGridTextColumn Width ="37*" Header="Instruktor" Binding="{Binding InstructorUserName}" />
                 <DataGridTextColumn Width ="38*" Header="Polaznik" Binding="{Binding CustomerUserName}" />
-                <DataGridCheckBoxColumn Width ="30*" Header="Obrisan" Binding="{Binding IsRemoved}" />
 
             </DataGrid.Columns>
 

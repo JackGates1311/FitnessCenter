@@ -53,7 +53,7 @@ public class FitnessCenterController {
 
         DataTable dt = connection.PerformQuery(query);
 
-        MessageBox.Show("Podaci o fitnes centru su uspešno izmenjeni!", "Obaveštenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Information);
+        MessageBox.Show("Podaci o fitnes centru su uspešno izmenjeni", "Obaveštenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Information);
 
         connection.CloseConnection();
     }

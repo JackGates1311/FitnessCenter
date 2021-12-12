@@ -23,6 +23,8 @@ namespace Fitness_Center.Views
     {
         WorkoutController workoutController = new WorkoutController();
 
+        RemoveOrEditSelectedRowController removeOrEditSelectedRowController = new RemoveOrEditSelectedRowController();
+
         public WorkoutView()
         {
             InitializeComponent();
@@ -45,7 +47,8 @@ namespace Fitness_Center.Views
         {
             OperationModeModel.workoutInfoViewMode = EWorkoutInfoViewOperationMode.Edit;
 
-            if (workoutController.CheckEditWorkout(this).Equals(true))
+            if (removeOrEditSelectedRowController.CheckIfRowIsSelected(tableWorkouts).Equals(true) &&
+                removeOrEditSelectedRowController.CheckIfSelectedRowIsRemoved(tableWorkouts, "Workouts").Equals(false))
             {
                 WorkoutInfoView workoutInfoView = new WorkoutInfoView();
 
@@ -61,16 +64,9 @@ namespace Fitness_Center.Views
 
         private void btnDeleteWorkout_Click(object sender, RoutedEventArgs e)
         {
-            if (workoutController.CheckAndConfirmRemoveWorkout(this).Equals(true))
-            {
-                workoutController.RemoveWorkout();
+            removeOrEditSelectedRowController.CheckAndPerformDelete(tableWorkouts, "Workouts", "WorkoutId");
 
-                workoutController.LoadWorkouts(tableWorkouts);
-            }
-            else
-                return;
-
+            workoutController.LoadWorkouts(tableWorkouts);
         }
-
     }
 }
