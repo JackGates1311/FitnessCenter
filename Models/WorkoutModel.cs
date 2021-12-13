@@ -6,9 +6,6 @@ using System.Text;
 
 public class WorkoutModel {
 
-    public WorkoutModel() {
-    }
-
     private int id;
 
     private DateTime dateTimeStart;
@@ -33,6 +30,19 @@ public class WorkoutModel {
     public string Instructor { get => instructor; set => instructor = value; }
     public string Customer { get => customer; set => customer = value; }
     public bool IsRemoved { get => isRemoved; set => isRemoved = value; }
+
+    public WorkoutModel()
+    {
+        Id = 0;
+        DateTimeStart = default;
+        DateTimeEnd = default;
+        Length = 0;
+        WorkoutStatus = EWorkoutStatus.Available;
+        Instructor = null;
+        Customer = null;
+        IsRemoved = true;
+
+    }
 
     public WorkoutModel(DateTime dateTimeStart, DateTime dateTimeEnd, int length, EWorkoutStatus workoutStatus, string instructor, string customer, bool isRemoved)
     {
