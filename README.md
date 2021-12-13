@@ -29,13 +29,13 @@ Aplikacija podržava sledeće funkcionalnosti:
 
 5. {+ Administrator-ima mogućnost pregleda svih entiteta. Sve podatke može da doda, izmeni i obriše. Sva brisanja su logička (podatak postaje neaktivan i više se ne prikazuje, ne može se obrisati i izmeniti). Može da briše Treninge bez obzira da li su REZERVISANI ili SLOBODNI. Kreira inicijalno SLOBODNE treninge instruktorima. Samo administratori mogu da registruju nove instruktore. +}
 
-6. Instruktor ima mogućnost pregleda svojih treninga (slobodnih i zauzetih) za odabrani datum i pregled polaznika koji su kod njega rezervisali trening. Omogućiti da instruktori kreiraju i brišu
-svoje slobodne treninge. Ograničenje prilikom brisanja termina: instruktor ne može da obriše trening ako je REZERVISAN tj. ako je u tom terminu izvršena rezervacija.
+6. {+ Instruktor ima mogućnost pregleda svojih treninga (slobodnih i zauzetih) za odabrani datum i pregled polaznika koji su kod njega rezervisali trening. Omogućiti da instruktori kreiraju i brišu
+svoje slobodne treninge. Ograničenje prilikom brisanja termina: instruktor ne može da obriše trening ako je REZERVISAN tj. ako je u tom terminu izvršena rezervacija. +}
 
 7. Polaznik ima mogućnost da za odabranog instruktura pregleda listu slobodnih/rezervisanih treninga. Omogućiti grafički prikaz svih treninga (REZERVISANIH/SLOBODNIH) za odabranog instruktora. Polaznik ima mogućnost rezervacije SLOBODNOG treninga, kao i otkazivanja svog prethodno REZERVISANOG treninga.
 
 8. Pretraga je realizovana tako da korisnici imaju pregled sledećih entiteta:
 	{+ * Instruktora - pretraga po imenu, prezimenu, adresi, email adresi (ovu mogućnost imaju REGISTROVANI/NEREGISTROVANI koriscnici sistema) +}
-	* Registrovani korisnici- pretraga po imenu, prezimenu, adresi, email adresi, ili po tipu (ovu mogućnost imaju administratori)
+	{+ * Registrovani korisnici- pretraga po imenu, prezimenu, adresi, email adresi, ili po tipu (ovu mogućnost imaju administratori) +}
 
 9. {+ Prilikom pretrage omogućiti sortiranje entiteta po imenu i prezimenu, u opdajućem,i/ili rastućem redosledu. +}

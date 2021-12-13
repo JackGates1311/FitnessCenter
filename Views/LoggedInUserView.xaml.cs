@@ -55,6 +55,8 @@ namespace Fitness_Center.Views
         {
             instructorsInfoViewTabItem.Visibility = Visibility.Visible;
             userInfoViewTabItem.Visibility = Visibility.Visible;
+            workoutViewTabItem.Visibility = Visibility.Visible;
+            customerViewTabItem.Visibility = Visibility.Visible;
         }
 
         private void ViewCustomerTabItems()

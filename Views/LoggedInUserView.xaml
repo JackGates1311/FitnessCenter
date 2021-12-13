@@ -131,6 +131,26 @@
 
             </TabItem>
 
+            <TabItem x:Name="customerViewTabItem" Visibility="Collapsed">
+
+                <TabItem.Header>
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <Label Content="Polaznici" />
+
+                    </StackPanel>
+
+                </TabItem.Header>
+
+                <AdornerDecorator>
+
+                    <local:CustomerView/>
+
+                </AdornerDecorator>
+
+            </TabItem>
+
         </TabControl>
 
     </Grid>

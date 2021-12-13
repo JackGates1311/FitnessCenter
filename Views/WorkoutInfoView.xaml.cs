@@ -41,6 +41,14 @@ namespace Fitness_Center.Views
             {
                 timePickerWorkout.Text = DateTime.Now.ToString("HH:mm");
 
+                if (LoggedInUserModel.userType.Equals(EUserType.Instructor))
+                {
+                    lblInstructor.Visibility = Visibility.Hidden;
+                    cmbBoxInstructor.Visibility = Visibility.Hidden;
+
+                    cmbBoxInstructor.SelectedItem = LoggedInUserModel.userName;
+                }
+
             }
             if (OperationModeModel.workoutInfoViewMode.Equals(EWorkoutInfoViewOperationMode.Edit))
             {
@@ -49,6 +57,13 @@ namespace Fitness_Center.Views
                 cmbBoxCustomer.Items.Add("");
 
                 cmbBoxCustomer = workoutController.GetAllInstructorOrCustomerUserName(cmbBoxCustomer, "SELECT UserName from Users WHERE UserType = 'Customer';");
+
+                if (LoggedInUserModel.userType.Equals(EUserType.Instructor))
+                {
+                    cmbBoxInstructor.IsEnabled = false;
+
+                    cmbBoxInstructor.SelectedItem = LoggedInUserModel.userName;
+                }
             }
         }
 
@@ -91,7 +106,6 @@ namespace Fitness_Center.Views
                     MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
-
         }
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)

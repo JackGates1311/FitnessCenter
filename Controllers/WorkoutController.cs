@@ -13,11 +13,11 @@ namespace Fitness_Center.Controllers
     {
         SqlConnectController connection = new SqlConnectController();
 
-        RemoveOrEditSelectedRowController dataGridController = new RemoveOrEditSelectedRowController();
+        RemoveOrEditSelectedRowController removeOrEditSelectedRowController = new RemoveOrEditSelectedRowController();
 
-        public void LoadWorkouts(DataGrid table)
+        public void LoadWorkouts(DataGrid table, String queryUserTypeProperty, String querySelectedDateProperty)
         {
-            var query = "SELECT * from Workouts WHERE IsRemoved='0' ORDER BY DateTimeStart;";
+            var query = "SELECT * from Workouts WHERE IsRemoved='0' " + queryUserTypeProperty + querySelectedDateProperty + "ORDER BY DateTimeStart;";
 
             SqlConnectController connection = new SqlConnectController();
 
@@ -125,14 +125,16 @@ namespace Fitness_Center.Controllers
 
         public Boolean CheckAndConfirmRemoveWorkout(WorkoutView workoutView)
         {
-            if (dataGridController.CheckIfRowIsSelected(workoutView.tableWorkouts).Equals(true))
+            if (removeOrEditSelectedRowController.CheckIfRowIsSelected(workoutView.tableWorkouts).Equals(true))
             {
                 if (MessageBox.Show("Da li ste sigurni da želite obrisati izabrani trening?", "Upozorenje - Fitnes centar",
                     MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
 
-                    if (dataGridController.CheckIfSelectedRowIsRemoved(workoutView.tableWorkouts, "Workouts").Equals(false))
+                    if (removeOrEditSelectedRowController.CheckIfSelectedRowIsPossibleToRemove(workoutView.tableWorkouts, "Workouts").Equals(false))
+                    {
                         return true;
+                    }
                     else
                         return false;
                 }

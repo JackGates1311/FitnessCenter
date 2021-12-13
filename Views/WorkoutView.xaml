@@ -19,8 +19,12 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            
             <RowDefinition Height="50"/>
             <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
@@ -29,14 +33,20 @@
         </Grid.RowDefinitions>
 
         <Label Style="{StaticResource labelBold}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Content="Treninzi"/>
+
+        <DatePicker x:Name="datePickerWorkout" Grid.Row="2"  Grid.Column="0" SelectedDate="{x:Static sys:DateTime.Today}" Width="250" />
+
+        <Button x:Name="btnViewWorkoutsForSelectedDate" Grid.Row="3" Grid.Column="0" Content="Prikaži treninge za izabrani datum" Click="btnViewWorkoutsForSelectedDate_Click" Width="250"  Margin="10" />
+
+        <Button x:Name="btnViewAllWorkouts" Grid.Row="4" Grid.Column="0" Content="Prikaži sve treninge" Click="btnViewAllWorkouts_Click" Width="250"  Margin="10" />
         
-        <Button x:Name="btnAddWorkout" Grid.Row="2" Grid.Column="0" Content="Dodaj trening" Click="btnAddWorkout_Click" Width="250" Margin="0" />
+        <Button x:Name="btnAddWorkout" Grid.Row="5" Grid.Column="0" Content="Dodaj trening" Click="btnAddWorkout_Click" Width="250" Margin="0" />
 
-        <Button x:Name="btnEditWorkout" Grid.Row="3" Grid.Column="0" Content="Izmeni izabrani trening" Click="btnEditWorkout_Click" Width="250"  Margin="10" />
+        <Button x:Name="btnEditWorkout" Grid.Row="6" Grid.Column="0" Content="Izmeni izabrani trening" Click="btnEditWorkout_Click" Width="250"  Margin="10" />
 
-        <Button x:Name="btnDeleteWorkout" Grid.Row="4" Grid.Column="0" Content="Obriši izabrani trening" Click="btnDeleteWorkout_Click" Width="250"  Margin="10" />
+        <Button x:Name="btnDeleteWorkout" Grid.Row="7" Grid.Column="0" Content="Obriši izabrani trening" Click="btnDeleteWorkout_Click" Width="250"  Margin="10" />
 
-        <DataGrid x:Name="tableWorkouts" IsReadOnly="True" Grid.Row="2" Grid.Column="2" Grid.RowSpan="4">
+        <DataGrid x:Name="tableWorkouts" IsReadOnly="True" Grid.Row="2" Grid.Column="2" Grid.RowSpan="7">
 
             <DataGrid.Columns>
 

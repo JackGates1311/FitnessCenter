@@ -1,6 +1,7 @@
 ﻿public enum EWorkoutInfoViewOperationMode
 {
     Add,
-    Edit
+    Edit,
+    Remove
 }
 

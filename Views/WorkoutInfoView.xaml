@@ -48,7 +48,7 @@
 
         <ComboBox x:Name="cmbBoxLength" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" Width="225" />
 
-        <Label Grid.Row="3" Grid.Column="2" Content="Instruktor: "/>
+        <Label x:Name="lblInstructor" Grid.Row="3" Grid.Column="2" Content="Instruktor: "/>
 
         <ComboBox x:Name="cmbBoxInstructor" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" Width="225"/>
 

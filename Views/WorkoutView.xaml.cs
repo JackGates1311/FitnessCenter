@@ -29,7 +29,26 @@ namespace Fitness_Center.Views
         {
             InitializeComponent();
 
-            workoutController.LoadWorkouts(tableWorkouts);
+            LoadAllWorkouts();
+        }
+
+        private void LoadWorkoutsForSelectedDate()
+        {
+            if (LoggedInUserModel.userType.Equals(EUserType.Administrator))
+                workoutController.LoadWorkouts(tableWorkouts, "", " AND CONVERT(DATETIME, FLOOR(CONVERT(FLOAT, DateTimeStart))) =  " +
+                    "CONVERT(DATE, '" + datePickerWorkout.SelectedDate.Value.ToString("yyyy-MM-dd") + "')");
+            if (LoggedInUserModel.userType.Equals(EUserType.Instructor))
+                workoutController.LoadWorkouts(tableWorkouts, "AND InstructorUserName LIKE '" + LoggedInUserModel.userName + "' ", " AND CONVERT(DATETIME, FLOOR(CONVERT(FLOAT, DateTimeStart))) =  " +
+                    "CONVERT(DATE, '" + datePickerWorkout.SelectedDate.Value.ToString("yyyy-MM-dd") + "')");
+
+        }
+
+        private void LoadAllWorkouts()
+        {
+            if (LoggedInUserModel.userType.Equals(EUserType.Administrator))
+                workoutController.LoadWorkouts(tableWorkouts, "", "");
+            if (LoggedInUserModel.userType.Equals(EUserType.Instructor))
+                workoutController.LoadWorkouts(tableWorkouts, "AND InstructorUserName LIKE '" + LoggedInUserModel.userName + "' ", "");
         }
 
         private void btnAddWorkout_Click(object sender, RoutedEventArgs e)
@@ -40,15 +59,17 @@ namespace Fitness_Center.Views
 
             workoutInfoView.ShowDialog();
 
-            workoutController.LoadWorkouts(tableWorkouts);
+            LoadAllWorkouts();
         }
 
         private void btnEditWorkout_Click(object sender, RoutedEventArgs e)
         {
             OperationModeModel.workoutInfoViewMode = EWorkoutInfoViewOperationMode.Edit;
 
+
+
             if (removeOrEditSelectedRowController.CheckIfRowIsSelected(tableWorkouts).Equals(true) &&
-                removeOrEditSelectedRowController.CheckIfSelectedRowIsRemoved(tableWorkouts, "Workouts").Equals(false))
+                removeOrEditSelectedRowController.CheckIfSelectedRowIsPossibleToRemove(tableWorkouts, "Workouts").Equals(false))
             {
                 WorkoutInfoView workoutInfoView = new WorkoutInfoView();
 
@@ -56,7 +77,7 @@ namespace Fitness_Center.Views
 
                 workoutInfoView.ShowDialog();
 
-                workoutController.LoadWorkouts(tableWorkouts);
+                LoadAllWorkouts();
             }
             else
                 return;
@@ -64,9 +85,21 @@ namespace Fitness_Center.Views
 
         private void btnDeleteWorkout_Click(object sender, RoutedEventArgs e)
         {
+            OperationModeModel.workoutInfoViewMode = EWorkoutInfoViewOperationMode.Remove;
+
             removeOrEditSelectedRowController.CheckAndPerformDelete(tableWorkouts, "Workouts", "WorkoutId");
 
-            workoutController.LoadWorkouts(tableWorkouts);
+            LoadAllWorkouts();
+        }
+
+        private void btnViewWorkoutsForSelectedDate_Click(object sender, RoutedEventArgs e)
+        {
+            LoadWorkoutsForSelectedDate();
+        }
+
+        private void btnViewAllWorkouts_Click(object sender, RoutedEventArgs e)
+        {
+            LoadAllWorkouts();
         }
     }
 }
