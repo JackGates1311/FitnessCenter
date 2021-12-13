@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fitness_Center.Views"
-        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="Fitnes centar - Instruktori" Height="600" Width="1024">
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" MinHeight="600" MinWidth="1200"
+        Title="Fitnes centar - Instruktori" Height="600" Width="1200">
 
     <local:InstructorInfoView/>
 
