@@ -15,9 +15,11 @@ namespace Fitness_Center.Controllers
 
         RemoveOrEditSelectedRowController removeOrEditSelectedRowController = new RemoveOrEditSelectedRowController();
 
-        public void LoadWorkouts(DataGrid table, String queryUserTypeProperty, String querySelectedDateProperty)
+        public void LoadWorkouts(DataGrid table, String queryUserTypeProperty, String querySelectedDateProperty, String selectedInstructor,
+            String queryHideReservedWorkouts, String queryShowOnlyMyWorkoutsProperty)
         {
-            var query = "SELECT * from Workouts WHERE IsRemoved='0' " + queryUserTypeProperty + querySelectedDateProperty + "ORDER BY DateTimeStart;";
+            var query = "SELECT * from Workouts WHERE IsRemoved='0' " + queryUserTypeProperty + querySelectedDateProperty + queryHideReservedWorkouts + 
+                queryShowOnlyMyWorkoutsProperty + " AND InstructorUserName LIKE '%" + selectedInstructor + "%' " + "ORDER BY DateTimeStart;";
 
             SqlConnectController connection = new SqlConnectController();
 
@@ -131,7 +133,7 @@ namespace Fitness_Center.Controllers
                     MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
 
-                    if (removeOrEditSelectedRowController.CheckIfSelectedRowIsPossibleToRemove(workoutView.tableWorkouts, "Workouts").Equals(false))
+                    if (removeOrEditSelectedRowController.CheckIfSelectedRowIsPossibleToRemoveOrEdit(workoutView.tableWorkouts, "Workouts").Equals(false))
                     {
                         return true;
                     }
@@ -154,42 +156,34 @@ namespace Fitness_Center.Controllers
             connection.OpenConnection();
 
             DataTable dt = connection.PerformQuery(query);
+            workoutInfoView.SelectedRowWorkoutId = RemoveOrEditSelectedRowController.selectedRowId;
 
-            if (DateTime.Now > DateTime.Parse(dt.Rows[0]["DateTimeStart"].ToString()))
-            {
-                MessageBox.Show("Ovaj trening nije moguće izmeniti", "Upozorenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Warning);
-                workoutInfoView.Close();
-            }
-            else 
-            {
-                workoutInfoView.SelectedRowWorkoutId = RemoveOrEditSelectedRowController.selectedRowId;
+            workoutInfoView.Title = "Fitnes centar - Izmeni trening";
+            workoutInfoView.btnConfirm.Content = "Sačuvaj izmene";
+            workoutInfoView.lblTitle.Content = "Izmeni trening";
 
-                workoutInfoView.Title = "Fitnes centar - Izmeni trening";
-                workoutInfoView.btnConfirm.Content = "Sačuvaj izmene";
-                workoutInfoView.lblTitle.Content = "Izmeni trening";
+            workoutInfoView.workoutInfoViewGrid.RowDefinitions[5].Height = new GridLength(30);
+            workoutInfoView.workoutInfoViewGrid.RowDefinitions[6].Height = new GridLength(60);
+            workoutInfoView.workoutInfoViewWindow.Height = 440;
+            workoutInfoView.workoutInfoViewWindow.Width = 700;
 
-                workoutInfoView.workoutInfoViewGrid.RowDefinitions[5].Height = new GridLength(30);
-                workoutInfoView.workoutInfoViewGrid.RowDefinitions[6].Height = new GridLength(60);
-                workoutInfoView.workoutInfoViewWindow.Height = 440;
-                workoutInfoView.workoutInfoViewWindow.Width = 700;
+            workoutInfoView.lblWorkoutStatus.Visibility = Visibility.Visible;
+            workoutInfoView.cmbBoxWorkoutStatus.Visibility = Visibility.Visible;
+            workoutInfoView.lblCustomer.Visibility = Visibility.Visible;
+            workoutInfoView.cmbBoxCustomer.Visibility = Visibility.Visible;
 
-                workoutInfoView.lblWorkoutStatus.Visibility = Visibility.Visible;
-                workoutInfoView.cmbBoxWorkoutStatus.Visibility = Visibility.Visible;
-                workoutInfoView.lblCustomer.Visibility = Visibility.Visible;
-                workoutInfoView.cmbBoxCustomer.Visibility = Visibility.Visible;
+            workoutInfoView.datePickerWorkout.Text = dt.Rows[0]["DateTimeStart"].ToString();
+            workoutInfoView.timePickerWorkout.Text = DateTime.Parse(dt.Rows[0]["DateTimeStart"].ToString()).ToString("HH:mm");
+            workoutInfoView.cmbBoxLength.Text = dt.Rows[0]["Length"].ToString();
+            workoutInfoView.cmbBoxInstructor.Text = dt.Rows[0]["InstructorUserName"].ToString();
 
-                workoutInfoView.datePickerWorkout.Text = dt.Rows[0]["DateTimeStart"].ToString();
-                workoutInfoView.timePickerWorkout.Text = DateTime.Parse(dt.Rows[0]["DateTimeStart"].ToString()).ToString("HH:mm");
-                workoutInfoView.cmbBoxLength.Text = dt.Rows[0]["Length"].ToString();
-                workoutInfoView.cmbBoxInstructor.Text = dt.Rows[0]["InstructorUserName"].ToString();
+            if (dt.Rows[0]["WorkoutStatus"].ToString().Equals("Reserved"))
+                workoutInfoView.cmbBoxWorkoutStatus.Text = "Rezervisan";
+            else
+                workoutInfoView.cmbBoxWorkoutStatus.Text = "Slobodan";
 
-                if (dt.Rows[0]["WorkoutStatus"].ToString().Equals("Reserved"))
-                    workoutInfoView.cmbBoxWorkoutStatus.Text = "Rezervisan";
-                else
-                    workoutInfoView.cmbBoxWorkoutStatus.Text = "Slobodan";
+            workoutInfoView.cmbBoxCustomer.Text = dt.Rows[0]["CustomerUserName"].ToString();
 
-                workoutInfoView.cmbBoxCustomer.Text = dt.Rows[0]["CustomerUserName"].ToString();
-            }
 
             connection.CloseConnection();
 
@@ -211,6 +205,21 @@ namespace Fitness_Center.Controllers
             MessageBox.Show("Trening je uspešno izmenjen", "Obaveštenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Information);
 
             connection.CloseConnection();
+        }
+
+        public void SetWorkoutStatus(String queryPropertyWorkoutStatus, String queryPropertyCustomerUserName)
+        {
+            var query = "UPDATE Workouts SET WorkoutStatus = '" + queryPropertyWorkoutStatus + "', CustomerUserName = '" + queryPropertyCustomerUserName + 
+                "' WHERE WorkoutId = " + RemoveOrEditSelectedRowController.selectedRowId + ";";
+
+            SqlConnectController connection = new SqlConnectController();
+
+            connection.OpenConnection();
+
+            DataTable dt = connection.PerformQuery(query);
+
+            connection.CloseConnection();
+
         }
     }
 }

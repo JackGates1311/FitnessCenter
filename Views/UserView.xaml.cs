@@ -46,7 +46,7 @@ namespace Fitness_Center.Views
         {
 
             if (removeOrEditSelectedRowController.CheckIfRowIsSelected(tableUsers).Equals(true) &&
-                removeOrEditSelectedRowController.CheckIfSelectedRowIsPossibleToRemove(tableUsers, "Users").Equals(false))
+                removeOrEditSelectedRowController.CheckIfSelectedRowIsPossibleToRemoveOrEdit(tableUsers, "Users").Equals(false))
             {
 
                 OperationModeModel.userInfoViewMode = EUserInfoViewOperationMode.EditTable;

@@ -32,7 +32,7 @@ Aplikacija podržava sledeće funkcionalnosti:
 6. {+ Instruktor ima mogućnost pregleda svojih treninga (slobodnih i zauzetih) za odabrani datum i pregled polaznika koji su kod njega rezervisali trening. Omogućiti da instruktori kreiraju i brišu
 svoje slobodne treninge. Ograničenje prilikom brisanja termina: instruktor ne može da obriše trening ako je REZERVISAN tj. ako je u tom terminu izvršena rezervacija. +}
 
-7. Polaznik ima mogućnost da za odabranog instruktura pregleda listu slobodnih/rezervisanih treninga. Omogućiti grafički prikaz svih treninga (REZERVISANIH/SLOBODNIH) za odabranog instruktora. Polaznik ima mogućnost rezervacije SLOBODNOG treninga, kao i otkazivanja svog prethodno REZERVISANOG treninga.
+7. {+ Polaznik ima mogućnost da za odabranog instruktura pregleda listu slobodnih/rezervisanih treninga. Omogućiti grafički prikaz svih treninga (REZERVISANIH/SLOBODNIH) za odabranog instruktora. Polaznik ima mogućnost rezervacije SLOBODNOG treninga, kao i otkazivanja svog prethodno REZERVISANOG treninga. +}
 
 8. Pretraga je realizovana tako da korisnici imaju pregled sledećih entiteta:
 	{+ * Instruktora - pretraga po imenu, prezimenu, adresi, email adresi (ovu mogućnost imaju REGISTROVANI/NEREGISTROVANI koriscnici sistema) +}

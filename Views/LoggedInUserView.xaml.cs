@@ -63,6 +63,7 @@ namespace Fitness_Center.Views
         {
             instructorsInfoViewTabItem.Visibility = Visibility.Visible;
             userInfoViewTabItem.Visibility = Visibility.Visible;
+            workoutViewTabItem.Visibility = Visibility.Visible;
         }
 
         private void MainWindow_Closed(object sender, EventArgs e)

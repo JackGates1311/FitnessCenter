@@ -25,30 +25,77 @@ namespace Fitness_Center.Views
 
         RemoveOrEditSelectedRowController removeOrEditSelectedRowController = new RemoveOrEditSelectedRowController();
 
+        String hideReservedWorkouts = "";
+        String showOnlyMyWorkouts = "";
+
         public WorkoutView()
         {
             InitializeComponent();
 
-            LoadAllWorkouts();
+            if (LoggedInUserModel.userType.Equals(EUserType.Customer))
+            {
+                btnAddWorkout.Visibility = Visibility.Collapsed;
+                btnEditWorkout.Visibility = Visibility.Collapsed;
+                btnDeleteWorkout.Visibility = Visibility.Collapsed;
+
+                btnReserveWorkout.Visibility = Visibility.Visible;
+                btnCancelWorkout.Visibility = Visibility.Visible;
+                chkBoxShowOnlyMyWorkouts.Visibility = Visibility.Visible;
+            }
+
+            cmbBoxInstructor.Items.Add("");
+
+            cmbBoxInstructor = workoutController.GetAllInstructorOrCustomerUserName(cmbBoxInstructor, "SELECT UserName from Users WHERE UserType = 'Instructor';");
+
+            cmbBoxInstructor.SelectedIndex = 0;
+                
+            // LoadAllWorkouts();
+
+        }
+
+        private void GetCheckBoxValues()
+        {
+            if (chkBoxHideReservedWorkouts.IsChecked == true)
+                hideReservedWorkouts = "AND WorkoutStatus = 'Available' ";
+            else
+                hideReservedWorkouts = "";
+
+            if (chkBoxShowOnlyMyWorkouts.IsChecked == true)
+                showOnlyMyWorkouts = "AND CustomeruserName = '" + LoggedInUserModel.userName + "' ";
+            else
+                showOnlyMyWorkouts = "";
         }
 
         private void LoadWorkoutsForSelectedDate()
         {
+            GetCheckBoxValues();
+
             if (LoggedInUserModel.userType.Equals(EUserType.Administrator))
                 workoutController.LoadWorkouts(tableWorkouts, "", " AND CONVERT(DATETIME, FLOOR(CONVERT(FLOAT, DateTimeStart))) =  " +
-                    "CONVERT(DATE, '" + datePickerWorkout.SelectedDate.Value.ToString("yyyy-MM-dd") + "')");
+                    "CONVERT(DATE, '" + datePickerWorkout.SelectedDate.Value.ToString("yyyy-MM-dd") + "')", cmbBoxInstructor.SelectedItem.ToString(), 
+                    hideReservedWorkouts, showOnlyMyWorkouts);
             if (LoggedInUserModel.userType.Equals(EUserType.Instructor))
-                workoutController.LoadWorkouts(tableWorkouts, "AND InstructorUserName LIKE '" + LoggedInUserModel.userName + "' ", " AND CONVERT(DATETIME, FLOOR(CONVERT(FLOAT, DateTimeStart))) =  " +
-                    "CONVERT(DATE, '" + datePickerWorkout.SelectedDate.Value.ToString("yyyy-MM-dd") + "')");
-
+                workoutController.LoadWorkouts(tableWorkouts, "AND InstructorUserName LIKE '" + LoggedInUserModel.userName + "' ", 
+                    " AND CONVERT(DATETIME, FLOOR(CONVERT(FLOAT, DateTimeStart))) =  " + 
+                    "CONVERT(DATE, '" + datePickerWorkout.SelectedDate.Value.ToString("yyyy-MM-dd") + "')", cmbBoxInstructor.SelectedItem.ToString(),
+                    hideReservedWorkouts, showOnlyMyWorkouts);
+            if(LoggedInUserModel.userType.Equals(EUserType.Customer))
+                workoutController.LoadWorkouts(tableWorkouts, "", " AND CONVERT(DATETIME, FLOOR(CONVERT(FLOAT, DateTimeStart))) =  " +
+                    "CONVERT(DATE, '" + datePickerWorkout.SelectedDate.Value.ToString("yyyy-MM-dd") + "')", cmbBoxInstructor.SelectedItem.ToString(),
+                    hideReservedWorkouts, showOnlyMyWorkouts);
         }
 
         private void LoadAllWorkouts()
         {
+            GetCheckBoxValues();
+
             if (LoggedInUserModel.userType.Equals(EUserType.Administrator))
-                workoutController.LoadWorkouts(tableWorkouts, "", "");
+                workoutController.LoadWorkouts(tableWorkouts, "", "", cmbBoxInstructor.SelectedItem.ToString(), hideReservedWorkouts, showOnlyMyWorkouts);
             if (LoggedInUserModel.userType.Equals(EUserType.Instructor))
-                workoutController.LoadWorkouts(tableWorkouts, "AND InstructorUserName LIKE '" + LoggedInUserModel.userName + "' ", "");
+                workoutController.LoadWorkouts(tableWorkouts, "AND InstructorUserName LIKE '" + LoggedInUserModel.userName + "' ", "",
+                    cmbBoxInstructor.SelectedItem.ToString(), hideReservedWorkouts, showOnlyMyWorkouts);
+            if (LoggedInUserModel.userType.Equals(EUserType.Customer))
+                workoutController.LoadWorkouts(tableWorkouts, "", "", cmbBoxInstructor.SelectedItem.ToString(), hideReservedWorkouts, showOnlyMyWorkouts);
         }
 
         private void btnAddWorkout_Click(object sender, RoutedEventArgs e)
@@ -66,10 +113,8 @@ namespace Fitness_Center.Views
         {
             OperationModeModel.workoutInfoViewMode = EWorkoutInfoViewOperationMode.Edit;
 
-
-
             if (removeOrEditSelectedRowController.CheckIfRowIsSelected(tableWorkouts).Equals(true) &&
-                removeOrEditSelectedRowController.CheckIfSelectedRowIsPossibleToRemove(tableWorkouts, "Workouts").Equals(false))
+                removeOrEditSelectedRowController.CheckIfSelectedRowIsPossibleToRemoveOrEdit(tableWorkouts, "Workouts").Equals(false))
             {
                 WorkoutInfoView workoutInfoView = new WorkoutInfoView();
 
@@ -99,6 +144,72 @@ namespace Fitness_Center.Views
 
         private void btnViewAllWorkouts_Click(object sender, RoutedEventArgs e)
         {
+            cmbBoxInstructor.SelectedIndex = 0;
+            LoadAllWorkouts();
+        }
+
+        private void cmbBoxInstructor_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            LoadAllWorkouts();
+        }
+
+        private void btnReserveWorkout_Click(object sender, RoutedEventArgs e)
+        {
+            OperationModeModel.workoutInfoViewMode = EWorkoutInfoViewOperationMode.Reserve;
+
+            if (removeOrEditSelectedRowController.CheckIfRowIsSelected(tableWorkouts).Equals(true) &&
+                removeOrEditSelectedRowController.CheckIfSelectedRowIsPossibleToRemoveOrEdit(tableWorkouts, "Workouts").Equals(false))
+            {
+
+                workoutController.SetWorkoutStatus("Reserved", LoggedInUserModel.userName);
+
+                MessageBox.Show("Uspešno ste rezervisali trening", "Obaveštenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Information);
+                
+                LoadAllWorkouts();
+
+                chkBoxHideReservedWorkouts.IsChecked = false;
+            }
+            else
+                return;
+
+        }
+
+        private void btnCancelWorkout_Click(object sender, RoutedEventArgs e)
+        {
+            OperationModeModel.workoutInfoViewMode = EWorkoutInfoViewOperationMode.Cancel;
+
+            if (removeOrEditSelectedRowController.CheckIfRowIsSelected(tableWorkouts).Equals(true) &&
+                removeOrEditSelectedRowController.CheckIfSelectedRowIsPossibleToRemoveOrEdit(tableWorkouts, "Workouts").Equals(false))
+            {
+                workoutController.SetWorkoutStatus("Available", "");
+
+                MessageBox.Show("Uspešno ste otkazali trening", "Obaveštenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                LoadAllWorkouts();
+
+                chkBoxShowOnlyMyWorkouts.IsChecked = false;
+            }
+            else
+                return;
+        }
+
+        private void chkBoxHideReservedWorkouts_Checked(object sender, RoutedEventArgs e)
+        {
+            LoadAllWorkouts();
+        }
+
+        private void chkBoxShowOnlyMyWorkouts_Checked(object sender, RoutedEventArgs e)
+        {
+            chkBoxHideReservedWorkouts.IsChecked = false;
+            chkBoxHideReservedWorkouts.IsEnabled = false;
+
+            LoadAllWorkouts();
+        }
+
+        private void chkBoxShowOnlyMyWorkouts_Unchecked(object sender, RoutedEventArgs e)
+        {
+            chkBoxHideReservedWorkouts.IsEnabled = true;
+
             LoadAllWorkouts();
         }
     }

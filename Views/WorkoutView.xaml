@@ -6,7 +6,7 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:Fitness_Center.Views"
              mc:Ignorable="d" Background="White"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="650" d:DesignWidth="800">
     
     <Grid Margin="0,0,23,21">
 
@@ -19,9 +19,12 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            
+
             <RowDefinition Height="50"/>
             <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
@@ -34,19 +37,36 @@
 
         <Label Style="{StaticResource labelBold}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Content="Treninzi"/>
 
-        <DatePicker x:Name="datePickerWorkout" Grid.Row="2"  Grid.Column="0" SelectedDate="{x:Static sys:DateTime.Today}" Width="250" />
+        <Label Grid.Row="1" Grid.Column="0" Content="Instruktor: " />
 
-        <Button x:Name="btnViewWorkoutsForSelectedDate" Grid.Row="3" Grid.Column="0" Content="Prikaži treninge za izabrani datum" Click="btnViewWorkoutsForSelectedDate_Click" Width="250"  Margin="10" />
+        <ComboBox x:Name="cmbBoxInstructor" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" 
+                  Width="250" SelectionChanged="cmbBoxInstructor_SelectionChanged" SelectedIndex="-1"/>
 
-        <Button x:Name="btnViewAllWorkouts" Grid.Row="4" Grid.Column="0" Content="Prikaži sve treninge" Click="btnViewAllWorkouts_Click" Width="250"  Margin="10" />
+        <Label Grid.Row="3" Grid.Column="0" Content="Datum: " />
+
+        <DatePicker x:Name="datePickerWorkout" Grid.Row="4"  Grid.Column="0" SelectedDate="{x:Static sys:DateTime.Today}" Width="250" />
+
+        <Button x:Name="btnViewWorkoutsForSelectedDate" Grid.Row="5" Grid.Column="0" Content="Prikaži treninge za izabrani datum" Click="btnViewWorkoutsForSelectedDate_Click" Width="250"  Margin="10" />
+
+        <Button x:Name="btnViewAllWorkouts" Grid.Row="6" Grid.Column="0" Content="Prikaži sve treninge" Click="btnViewAllWorkouts_Click" Width="250"  Margin="10" />
+
+        <CheckBox x:Name="chkBoxHideReservedWorkouts" Content="Sakrij rezervisane treninge" Grid.Row="7" Grid.Column="0" IsChecked="False" 
+                  Checked="chkBoxHideReservedWorkouts_Checked" Unchecked="chkBoxHideReservedWorkouts_Checked" Margin="0,15" />
+
+        <Button x:Name="btnAddWorkout" Grid.Row="8" Grid.Column="0" Content="Dodaj trening" Click="btnAddWorkout_Click" Width="250" Margin="10" />
+
+        <Button x:Name="btnReserveWorkout" Grid.Row="8" Grid.Column="0" Content="Rezerviši izrabrani trening" Click="btnReserveWorkout_Click" Width="250" Margin="10" Visibility="Collapsed"/>
         
-        <Button x:Name="btnAddWorkout" Grid.Row="5" Grid.Column="0" Content="Dodaj trening" Click="btnAddWorkout_Click" Width="250" Margin="0" />
+        <Button x:Name="btnEditWorkout" Grid.Row="9" Grid.Column="0" Content="Izmeni izabrani trening" Click="btnEditWorkout_Click" Width="250"  Margin="10" />
 
-        <Button x:Name="btnEditWorkout" Grid.Row="6" Grid.Column="0" Content="Izmeni izabrani trening" Click="btnEditWorkout_Click" Width="250"  Margin="10" />
+        <Button x:Name="btnCancelWorkout" Grid.Row="9" Grid.Column="0" Content="Otkaži izabrani trening" Click="btnCancelWorkout_Click" Width="250" Margin="10" Visibility="Collapsed" />
 
-        <Button x:Name="btnDeleteWorkout" Grid.Row="7" Grid.Column="0" Content="Obriši izabrani trening" Click="btnDeleteWorkout_Click" Width="250"  Margin="10" />
-
-        <DataGrid x:Name="tableWorkouts" IsReadOnly="True" Grid.Row="2" Grid.Column="2" Grid.RowSpan="7">
+        <Button x:Name="btnDeleteWorkout" Grid.Row="10" Grid.Column="0" Content="Obriši izabrani trening" Click="btnDeleteWorkout_Click" Width="250"  Margin="10" />
+          
+        <CheckBox x:Name="chkBoxShowOnlyMyWorkouts" Content="Prikaži samo moje rezervisane treninge" Grid.Row="10" Grid.Column="0" IsChecked="False" 
+                  Checked="chkBoxShowOnlyMyWorkouts_Checked" Unchecked="chkBoxShowOnlyMyWorkouts_Unchecked" Margin="0,15" Visibility="Collapsed" />
+        
+        <DataGrid x:Name="tableWorkouts" IsReadOnly="True" Grid.Row="2" Grid.Column="2" Grid.RowSpan="10">
 
             <DataGrid.Columns>
 

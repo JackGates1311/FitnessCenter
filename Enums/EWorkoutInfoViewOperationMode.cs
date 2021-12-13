@@ -2,6 +2,8 @@
 {
     Add,
     Edit,
-    Remove
+    Remove,
+    Reserve,
+    Cancel
 }
 

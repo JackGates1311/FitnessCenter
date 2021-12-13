@@ -24,7 +24,7 @@ namespace Fitness_Center.Controllers
                 return true;
         }
 
-        public Boolean CheckIfSelectedRowIsPossibleToRemove(DataGrid table, String queryTableProperty)
+        public Boolean CheckIfSelectedRowIsPossibleToRemoveOrEdit(DataGrid table, String queryTableProperty)
         {
             foreach (DataRowView row in table.SelectedItems)
             {
@@ -49,19 +49,50 @@ namespace Fitness_Center.Controllers
                 {
                     if (selectedRow[7].ToString() == "False" && queryTableProperty.Equals("Workouts"))
                     {
-
-                        if (LoggedInUserModel.userType.Equals(EUserType.Instructor) && selectedRow[4].ToString().Equals("Rezervisan") && OperationModeModel.workoutInfoViewMode == EWorkoutInfoViewOperationMode.Remove)
+                        if (DateTime.Now > DateTime.Parse(selectedRow[1].ToString()))
                         {
-                            MessageBox.Show("Izabrali ste trening koji je rezervisan", "Upozorenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            if(LoggedInUserModel.userType.Equals(EUserType.Customer))
+                                MessageBox.Show("Ovaj trening nije moguće rezervisati/otkazati", "Upozorenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            else
+                                MessageBox.Show("Ovaj trening nije moguće izmeniti", "Upozorenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Warning);
 
                             return true;
                         }
-                        else 
+                        else
                         {
-                            selectedRowId = selectedRow[0].ToString();
+                            if (selectedRow[4].ToString().Equals("Rezervisan") && ((LoggedInUserModel.userType.Equals(EUserType.Instructor) &&
+                                OperationModeModel.workoutInfoViewMode == EWorkoutInfoViewOperationMode.Remove) ||
+                                LoggedInUserModel.userType.Equals(EUserType.Customer) &&
+                                OperationModeModel.workoutInfoViewMode == EWorkoutInfoViewOperationMode.Reserve))
+                            {
+                                MessageBox.Show("Izabrali ste trening koji je rezervisan", "Upozorenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Warning);
 
-                            return false;
+                                return true;
+                            }
+                            else if (LoggedInUserModel.userType.Equals(EUserType.Customer) && !selectedRow[6].ToString().Equals(LoggedInUserModel.userName) &&
+                                selectedRow[4].ToString().Equals("Rezervisan") && OperationModeModel.workoutInfoViewMode == EWorkoutInfoViewOperationMode.Cancel)
+                            {
+                                MessageBox.Show("Izabrali ste trening koji niste Vi rezervisali", "Upozorenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                                return true;
+                            }
+                            else if (LoggedInUserModel.userType.Equals(EUserType.Customer) && selectedRow[4].ToString().Equals("Slobodan") &&
+                                OperationModeModel.workoutInfoViewMode == EWorkoutInfoViewOperationMode.Cancel)
+                            {
+
+                                MessageBox.Show("Izabrali ste trening koji nije rezervisan", "Upozorenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                                return true;
+                            }
+                            else
+                            {
+                                selectedRowId = selectedRow[0].ToString();
+
+                                return false;
+                            }
+
                         }
+
                     }
                     else
                     {
@@ -101,7 +132,7 @@ namespace Fitness_Center.Controllers
                     MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
 
-                    if (CheckIfSelectedRowIsPossibleToRemove(table, queryTableProperty).Equals(false))
+                    if (CheckIfSelectedRowIsPossibleToRemoveOrEdit(table, queryTableProperty).Equals(false))
                         RemoveSelectedRow(queryTableProperty, queryColumnProperty);
                     else
                         return;
