@@ -33,7 +33,7 @@ namespace Fitness_Center.Views
         {
             InitializeComponent();
 
-            cmbBoxInstructor = workoutController.GetAllInstructorOrCustomerUserName(cmbBoxInstructor, "SELECT UserName from Users WHERE UserType = 'Instructor';");
+            cmbBoxInstructor = workoutController.GetAllInstructorOrCustomerUserName(cmbBoxInstructor, "SELECT UserName from Users WHERE UserType = 'Instructor' AND IsRemoved='0';");
 
             cmbBoxLength = workoutController.FillComboBoxLength(cmbBoxLength);
 

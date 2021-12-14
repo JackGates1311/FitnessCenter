@@ -32,7 +32,7 @@ public class UnregisteredUserController
         {
             DataTable dt = connection.PerformQuery(query);
 
-            MessageBox.Show("Korisnik je uspešno registrovan!", "Obaveštenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Korisnik je uspešno registrovan", "Obaveštenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Information);
 
             userInfoView.CloseParentWindow();
         }

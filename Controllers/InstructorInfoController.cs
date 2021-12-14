@@ -14,7 +14,8 @@ namespace Fitness_Center.Controllers
         {
             var query = "SELECT Users.Name, Users.Surname, Users.Email, Addresses.Country, Addresses.City, Addresses.Street, " +
                 "Addresses.AddressNumber FROM Addresses INNER JOIN Users ON Addresses.AddressId = Users.AddressId WHERE Users.UserType = 'Instructor' " +
-                "AND Name LIKE '%" + Name + "%' and Surname LIKE '%" + Surname + "%' and Street LIKE '%" + Street + "%' and Email LIKE '%" + Email + "%'";
+                "AND IsRemoved='0' AND Name LIKE '%" + Name + "%' and Surname LIKE '%" + Surname + "%' and Street LIKE '%" + Street + "%' and Email LIKE '%" + 
+                Email + "%'";
 
             SqlConnectController connection = new SqlConnectController();
 

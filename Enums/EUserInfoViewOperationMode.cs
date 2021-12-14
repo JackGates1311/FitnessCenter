@@ -2,5 +2,6 @@
 {
     Add,
     Edit,
-    EditTable
+    EditTable,
+    Remove
 }

@@ -44,12 +44,11 @@ namespace Fitness_Center.Views
 
         private void btnEditUser_Click(object sender, RoutedEventArgs e)
         {
+            OperationModeModel.userInfoViewMode = EUserInfoViewOperationMode.EditTable;
 
             if (removeOrEditSelectedRowController.CheckIfRowIsSelected(tableUsers).Equals(true) &&
                 removeOrEditSelectedRowController.CheckIfSelectedRowIsPossibleToRemoveOrEdit(tableUsers, "Users").Equals(false))
             {
-
-                OperationModeModel.userInfoViewMode = EUserInfoViewOperationMode.EditTable;
 
                 RegisterNewOrEditUserView registerNewOrEditUserView = new RegisterNewOrEditUserView();
 
@@ -64,6 +63,8 @@ namespace Fitness_Center.Views
 
         private void btnDeleteUser_Click(object sender, RoutedEventArgs e)
         {
+            OperationModeModel.userInfoViewMode = EUserInfoViewOperationMode.Remove;
+
             removeOrEditSelectedRowController.CheckAndPerformDelete(tableUsers, "Users", "AddressId");
 
             FilterUserTable();

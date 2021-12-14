@@ -45,11 +45,13 @@ namespace Fitness_Center.Views
 
             cmbBoxInstructor.Items.Add("");
 
-            cmbBoxInstructor = workoutController.GetAllInstructorOrCustomerUserName(cmbBoxInstructor, "SELECT UserName from Users WHERE UserType = 'Instructor';");
+            cmbBoxInstructor = workoutController.GetAllInstructorOrCustomerUserName(cmbBoxInstructor, "SELECT UserName from Users WHERE UserType = 'Instructor' AND IsRemoved='0';");
 
+
+            if (LoggedInUserModel.userType.Equals(EUserType.Instructor))
+                cmbBoxInstructor.IsEnabled = false;
+            
             cmbBoxInstructor.SelectedIndex = 0;
-                
-            // LoadAllWorkouts();
 
         }
 

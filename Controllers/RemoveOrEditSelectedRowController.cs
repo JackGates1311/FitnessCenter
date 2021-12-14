@@ -34,9 +34,18 @@ namespace Fitness_Center.Controllers
                 {
                     if (selectedRow[13].ToString() == "False" && queryTableProperty.Equals("Users"))
                     {
-                        selectedRowId = selectedRow[0].ToString();
+                        if (selectedRow[8].ToString().Equals("Administrator") && OperationModeModel.userInfoViewMode.Equals(EUserInfoViewOperationMode.Remove))
+                        {
+                            MessageBox.Show("Administratorske naloge nije moguće ukloniti", "Upozorenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Warning);
 
-                        return false;
+                            return true;
+                        }
+                        else
+                        {
+                            selectedRowId = selectedRow[0].ToString();
+
+                            return false;
+                        }
                     }
                     else
                     {
@@ -49,7 +58,9 @@ namespace Fitness_Center.Controllers
                 {
                     if (selectedRow[7].ToString() == "False" && queryTableProperty.Equals("Workouts"))
                     {
-                        if (DateTime.Now > DateTime.Parse(selectedRow[1].ToString()))
+                        if (DateTime.Now > DateTime.Parse(selectedRow[1].ToString()) && (OperationModeModel.workoutInfoViewMode == EWorkoutInfoViewOperationMode.Edit
+                            || OperationModeModel.workoutInfoViewMode == EWorkoutInfoViewOperationMode.Reserve 
+                            || OperationModeModel.workoutInfoViewMode == EWorkoutInfoViewOperationMode.Cancel))
                         {
                             if(LoggedInUserModel.userType.Equals(EUserType.Customer))
                                 MessageBox.Show("Ovaj trening nije moguće rezervisati/otkazati", "Upozorenje - Fitnes centar", MessageBoxButton.OK, MessageBoxImage.Warning);
