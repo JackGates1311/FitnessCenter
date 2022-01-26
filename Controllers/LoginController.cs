@@ -17,8 +17,8 @@ public class LoginController {
 
     public Boolean loginToSystem(String userName, String password) {
 
-        var query = "SELECT * FROM users WHERE username = '" + userName + "' AND password = '" + password + "' COLLATE SQL_Latin1_General_Cp1_CS_AS " +
-            "AND IsRemoved = 0;";
+        var query = "SELECT * FROM users WHERE username = '" + userName + "' COLLATE SQL_Latin1_General_Cp1_CS_AS AND password = '" + password 
+            + "' COLLATE SQL_Latin1_General_Cp1_CS_AS " + "AND IsRemoved = 0;";
 
         SqlConnectController connection = new SqlConnectController();
 
